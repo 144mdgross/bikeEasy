@@ -8,4 +8,8 @@ $(document).ready(function(){
 $(document).ready(function() {
   $('select').material_select();
 
+  // set up time options dynamically in 24 hour system
+
+  //   
+
 });
