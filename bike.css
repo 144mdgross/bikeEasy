@@ -1,0 +1,33 @@
+/*note: 100% of parent element*/
+*, *:before, *:after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box: border-box;
+}
+html, body, main {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  height: 100%;
+}
+.map-container{
+  width: 100%;
+  height: 100%px;
+}
+
+#map {
+  height: 300px;
+  margin: 10px;
+  /*width: 100%;*/
+
+}
+
+/*html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }*/
