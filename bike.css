@@ -19,6 +19,10 @@ main {
   height: 100%px;
 }
 
+#mode-selector {
+  display: none;
+}
+
 #map {
   height: 300px;
   margin: 10px;

@@ -17,10 +17,11 @@
 
 
     <!-- Replace the value of the key parameter with your own API key. -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Lgex8nTqbToDXIyayP-WHEe2ssI6j5c&libraries=places"></script>
+    <!-- it also appears that I don't need the async and defer tags here either. since $(doc).ready -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Lgex8nTqbToDXIyayP-WHEe2ssI6j5c&libraries=places"></script>
 
     <!-- my js-->
-    <script src="bike-expirement.js" charset="utf-8"></script>
+    <script src="GIVE-IT-A-TRY.js" charset="utf-8"></script>
 
     <link rel="stylesheet" href="bike.css">
     <title>Bike Easy</title>
@@ -62,6 +63,18 @@
     <main>
         <div class="container">
             <h1 class="header center">the places you'll go</h1>
+            <!-- TYPE CONTROLS -->
+            <div id="mode-selector" class="controls">
+                <input type="radio" name="type" id="changemode-walking" checked="checked">
+                <label for="changemode-walking">Walking</label>
+
+                <input type="radio" name="type" id="changemode-transit">
+                <label for="changemode-transit">Transit</label>
+
+                <input type="radio" name="type" id="changemode-driving">
+                <label for="changemode-driving">Driving</label>
+            </div>
+              <!-- END OF TYPE CONTROLS -->
             <!-- MAP -->
             <div class="container">
                 <div class="row">
@@ -75,11 +88,11 @@
             <!-- START INPUT -->
             <div class="row">
                 <div class="input-field col s12 m12 l12">
-                    <input placeholder="1313 Mockingbird Lane" id="origin-input" class="controls" type="text" required>
+                    <input id="origin-input" placeholder="1313 Mockingbird Lane" class="controls" type="text" required>
                     <label class="active" for="Leave-From">Leave From</label>
                 </div>
                 <div class="input-field col s12 m12 l12">
-                    <input placeholder="1407 Graymalkin Lane, Salem Center, New York" id="destination-input" class="controls" type="text" required>
+                    <input id="destination-input" placeholder="1407 Graymalkin Lane, Salem Center, New York" class="controls" type="text" required>
                     <label class="active" for="Arrive-At">Arrive At</label>
                 </div>
             </div>
@@ -114,8 +127,8 @@
             <!-- button -->
             <div class="container">
                 <div class="row">
-                  <div class="col s12 m12 l12">
-                    <a id="submit" class="waves-effect waves-light btn-large center-align"><i class="material-icons left">cloud</i>button</a>
+                    <div class="col s12 m12 l12">
+                        <a id="submit" class="waves-effect waves-light btn-large center-align"><i class="material-icons left">cloud</i>button</a>
                     </div>
                 </div>
             </div>
