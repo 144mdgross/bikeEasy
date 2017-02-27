@@ -32,3 +32,25 @@
     }
 
     side ideas: when bike path is annoying: query for driving directions and then factor in the extra biking time to it. Then compare 'driving time' to 'bike path time' and return the fastest.
+
+
+
+
+SUDOCODE TAKE TWO-TWO
+## so. waypoints. can't use them for transit. but can use them for bikes. so. my plan at this point is:
+## in some order like this
+  GET bike waypoints to display.
+
+  MAKE WAYPOINTS THAT ARE BUS STOPS AND HARD CODE THOSE IN-MAYBE IN A HIDDEN SELECT box
+  then...based of the users destination....the selected box will change and they will have a waypoint at a bus station. ie union station.
+
+  AFTER THAT... i will need to do a transit search for that leg and then render that to the map
+
+  THEN...DISPLAY the rest of their trip as biking directions and bind that to the map too.
+
+  SIMPLE....
+
+  OTHER THINGS TO CONSIDER...if a user needs to ride a bike to get to the starting bus point and how to do that best?
+  WHAT IF...first leg is 'walking' but skew the map results to show biking polylines and times. THEN.....abandoning that line of thought for now.
+
+  WHAT IF....first there is a transit search from their location to where ever. (this means I have access to closest bus stop. or maybe i can also search for closest bus stop first and then make that a leg?)

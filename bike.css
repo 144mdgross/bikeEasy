@@ -28,6 +28,8 @@ main {
   margin: 10px;
   /*width: 100%;*/
 
+#directionsPanel {
+  height: 300px;
 }
 
 /*html, body {

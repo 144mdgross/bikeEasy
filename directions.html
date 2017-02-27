@@ -21,7 +21,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Lgex8nTqbToDXIyayP-WHEe2ssI6j5c&libraries=places"></script>
 
     <!-- my js-->
-    <script src="GIVE-IT-A-TRY.js" charset="utf-8"></script>
+    <script src="multiple-route-trial.js" charset="utf-8"></script>
 
     <link rel="stylesheet" href="bike.css">
     <title>Bike Easy</title>
@@ -74,7 +74,7 @@
                 <input type="radio" name="type" id="changemode-driving">
                 <label for="changemode-driving">Driving</label>
             </div>
-              <!-- END OF TYPE CONTROLS -->
+            <!-- END OF TYPE CONTROLS -->
             <!-- MAP -->
             <div class="container">
                 <div class="row">
@@ -84,6 +84,28 @@
                 </div>
             </div>
             <!-- END OF MAP -->
+
+            <!-- DIRECTIONS PANEL -->
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div id="directionsPanel"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- END OF DIRECTIONS PANEL -->
+
+            <!-- BOULDER TO DENVER, DENVER TO BOULDER SELECT box -->
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <select>
+          <option value="Boulder-Denver" selected>Boulder to Denver</option>
+          <option value="Denver-Boulder">Denver to Boulder</option>
+      </select>
+                    <label>Which Way?</label>
+                </div>
+            </div>
+            <!-- END OF SELECT BOXES -->
 
             <!-- START INPUT -->
             <div class="row">
@@ -96,9 +118,9 @@
                     <label class="active" for="Arrive-At">Arrive At</label>
                 </div>
             </div>
-
+            <!-- SELECT BOX ARRIVE/DEPART -->
             <div class="row">
-                <div class="input-field col s12 m12 l12">
+                <div class="input-field col s16 m6 l6">
                     <select>
           <option value="1" selected>arrive by</option>
           <option value="2">depart at</option>
@@ -107,22 +129,23 @@
       </select>
                     <label><i class="material-icons">directions_bike</i></label>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="input-field col s12 m12 l12">
+            <!-- END OF SELECT BOX ARRIVE/DEPART -->
+
+            <!-- TIME SELECT BOX -->
+
+                <div class="input-field col s6 m6 l6">
                     <select>
             <!-- is there a better way to do this? dymanically? yes. -->
             <option value="13" selected>13:00</option>
             <option value="14">14:00</option>
             <option value="15" selected>15:00</option>
             <option value="16">16:00</option>
-            <!-- explore options is very optional -->
-            <!-- <option value="3">explore options</option> -->
         </select>
                     <label><i class="material-icons">access_time</i></label>
                 </div>
             </div>
+            <!-- END OF SELECT BOX -->
 
             <!-- button -->
             <div class="container">

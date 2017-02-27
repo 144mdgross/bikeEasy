@@ -1,4 +1,6 @@
 let map
+let directionsService
+let directionsDisplay
 
 
 $(document).ready(function() {
@@ -10,13 +12,14 @@ $(document).ready(function() {
 
     function initMap() {
         // the two directions display/service may not be necessary
-        let directionsDisplay = new google.maps.DirectionsRenderer;
-        let directionsService = new google.maps.DirectionsService;
+        directionsDisplay = new google.maps.DirectionsRenderer;
+
+        directionsService = new google.maps.DirectionsService;
         map = new google.maps.Map(document.getElementById('map'), {
             // mapTypeControl: false,
             center: {
-                lat: -34.397,
-                lng: 150.644
+                lat: 40.0722083,
+                lng: -105.5083316
             },
             zoom: 15
         });
@@ -33,7 +36,7 @@ $(document).ready(function() {
                 };
 
                 infoWindow.setPosition(pos);
-                infoWindow.setContent('Boo');
+                infoWindow.setContent('Boo!');
                 map.setCenter(pos);
             }, function() {
                 handleLocationError(true, infoWindow, map.getCenter());
@@ -63,7 +66,7 @@ $(document).ready(function() {
         this.travelMode = 'TRANSIT';
         var originInput = document.getElementById('origin-input');
         var destinationInput = document.getElementById('destination-input');
-        var modeSelector = document.getElementById('mode-selector');
+        // var modeSelector = document.getElementById('mode-selector');
         this.directionsService = new google.maps.DirectionsService;
         this.directionsDisplay = new google.maps.DirectionsRenderer;
         this.directionsDisplay.setMap(map);
@@ -77,14 +80,14 @@ $(document).ready(function() {
                 placeIdOnly: true
             });
 
-        //this.setupClickListener('changemode-walking', 'WALKING');
-        //this.setupClickListener('changemode-transit', 'TRANSIT');
-        //this.setupClickListener('changemode-driving', 'DRIVING');
+        // this.setupClickListener('changemode-walking', 'WALKING');
+        // this.setupClickListener('changemode-transit', 'TRANSIT');
+        // this.setupClickListener('changemode-driving', 'DRIVING');
 
         // I CAN'T SEEM TO USE GEOLOCATE WITH THESE TWO LINES. AND WITHOUT THEM MY INPUT FIELDS GET PUT ON TOP OF THE MAP....
 
-        // this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
-        // this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+        this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
 
         // SWEET TAKING OUT THESE LINES OF CODE AS WELL LETS ME DO BOTH THINGS...FOR NOW...
 
@@ -95,16 +98,16 @@ $(document).ready(function() {
 
     // Sets a listener on a radio button to change the filter type on Places
     // Autocomplete.
-    /*AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
-      var radioButton = document.getElementById(id);
-      var me = this;
-      radioButton.addEventListener('click', function() {
-        me.travelMode = mode;
-        me.route();
-      });
-    };*/
+    AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+        var radioButton = document.getElementById(id);
+        var me = this;
+        radioButton.addEventListener('click', function() {
+            me.travelMode = mode;
+            me.route();
+        });
+    };
 
-    AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+    AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete) {
         var me = this;
         autocomplete.bindTo('bounds', this.map);
         autocomplete.addListener('place_changed', function() {
