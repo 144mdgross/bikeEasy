@@ -25,11 +25,31 @@ main {
 
 #map {
   height: 300px;
+  width: 800px;
   margin: 10px;
   /*width: 100%;*/
 
-#directionsPanel {
+}
+
+#panelOne {
   height: 300px;
+  width: 300px;
+  margin: 10px;
+  overflow: scroll;
+}
+
+#panelTwo {
+  height: 300px;
+  width: 300px;
+  margin: 10px;
+  overflow: scroll;
+}
+
+#panelThree {
+  height: 300px;
+  width: 300px;
+  margin: 10px;
+  overflow: scroll;
 }
 
 /*html, body {

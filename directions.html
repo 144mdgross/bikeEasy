@@ -23,6 +23,7 @@
     <!-- my js-->
     <script src="multiple-route-trial.js" charset="utf-8"></script>
 
+    <!-- my stylesheet -->
     <link rel="stylesheet" href="bike.css">
     <title>Bike Easy</title>
 </head>
@@ -61,7 +62,7 @@
     </header>
 
     <main>
-        <div class="container">
+        <!-- <div class="container"> -->
             <h1 class="header center">the places you'll go</h1>
             <!-- TYPE CONTROLS -->
             <div id="mode-selector" class="controls">
@@ -78,22 +79,35 @@
             <!-- MAP -->
             <div class="container">
                 <div class="row">
-                    <div class="col s12 m12 l12">
+                    <div class="col s12 m12 l6">
                         <div id="map"></div>
                     </div>
                 </div>
             </div>
             <!-- END OF MAP -->
 
-            <!-- DIRECTIONS PANEL -->
+            <!-- DIRECTIONS PANEL ONE -->
             <div class="container">
                 <div class="row">
-                    <div class="col s12 m12 l12">
-                        <div id="directionsPanel"></div>
+                    <div class="col s4 m4 l4">
+                        <div id='panelOne'></div>
+                    </div>
+            <!-- END OF DIRECTIONS PANEL ONE-->
+
+            <!-- DIRECTIONS PANEL TWO-->
+                    <div class="col s4 m4 l4">
+                        <div id='panelTwo'></div>
+                    </div>
+            <!-- END OF DIRECTIONS PANEL TWO-->
+
+            <!-- DIRECTIONS PANEL THREE-->
+                    <div class="col s4 m4 l4">
+                        <div id='panelThree'></div>
                     </div>
                 </div>
             </div>
-            <!-- END OF DIRECTIONS PANEL -->
+            <!-- END OF DIRECTIONS PANEL THREE-->
+
 
             <!-- BOULDER TO DENVER, DENVER TO BOULDER SELECT box -->
             <div class="row">
@@ -156,7 +170,7 @@
                 </div>
             </div>
 
-        </div>
+        <!-- </div> -->
 
         <!-- FOR SOME REASON THE FOOTER SMASHES THE MAIN CONTENT IF IT ISN'T INSIDE THE MAIN TAG. THIS ONLY SEEMS TO HAPPEN WITH THE MAP PRESENT. -->
         <footer class="page-footer">
