@@ -33,8 +33,7 @@ $(document).ready(function() {
         });
   }
 
-  function GetLatlongDestination()
-  {
+  function GetLatlongDestination() {
       var geocoder = new google.maps.Geocoder();
       address2 = document.getElementById('destination-input').value;
 
@@ -229,18 +228,39 @@ $(document).ready(function() {
         new AutocompleteDirectionsHandler(map);
 
         // call first route
-        calculateAndDisplayRoute(new google.maps.LatLng(40.0722083, -105.5083316), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
 
-        // call bus route
-        calculateAndDisplayBusRoute(new google.maps.LatLng(40.016779, -105.276376), new google.maps.LatLng(39.753931, -105.001159), directionsService, directionsDisplay, map)
-
-        // call second route
-        calculateAndDisplayRoute(new google.maps.LatLng(39.753931, -105.001159), new google.maps.LatLng(39.7367179, -104.9847337), directionsService, directionsDisplay, map)
 
     }
 
 
     initMap()
+
+
+    // // calculateAndDisplayRoute(new google.maps.LatLng(originLatitude, originLongitude), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
+    // calculateAndDisplayRoute(new google.maps.LatLng(40.0722083, -105.5083316), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
+    //
+    // // call bus route
+    // calculateAndDisplayBusRoute(new google.maps.LatLng(40.016779, -105.276376), new google.maps.LatLng(39.753931, -105.001159), directionsService, directionsDisplay, map)
+    //
+    // // call second route
+    // // calculateAndDisplayRoute(new google.maps.LatLng(destinationLatitude, destinationLongitude), new google.maps.LatLng(39.7367179, -104.9847337), directionsService, directionsDisplay, map)
+    // calculateAndDisplayRoute(new google.maps.LatLng(39.753931, -105.001159), new google.maps.LatLng(39.7367179, -104.9847337), directionsService, directionsDisplay, map)
+
+    //  SOOOO. I NEED AN EVENT LISTENER THAT WILL CALL THESE FUNTCIONS W/ THEIR VARIABLES WHEN THE USER HITS SUBMIT, AND ERROR CONTROL SO THAT IF IT'S EMPTY IT WON'T DO ANYTHING.
+    $('#submit').click(function(e){
+      e.target = this
+      if($('#origin-input').val()==="" || $('#destination-input').val()==="") {
+        Materialize.toast('I am a toast!', 4000)
+      } else {
+        calculateAndDisplayRoute(new google.maps.LatLng(originLatitude, originLongitude), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
+
+        calculateAndDisplayBusRoute(new google.maps.LatLng(40.016779, -105.276376), new google.maps.LatLng(39.753931, -105.001159), directionsService, directionsDisplay, map)
+
+        calculateAndDisplayRoute(new google.maps.LatLng(39.753931, -105.001159), new google.maps.LatLng(destinationLatitude, destinationLongitude), directionsService, directionsDisplay, map)
+
+      }
+    })
+
 })
 // Get the ball rolling and trigger our init() on 'load'
 //  google.maps.event.addDomListener(window, 'load', init);
