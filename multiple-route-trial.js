@@ -22,6 +22,17 @@ $(document).ready(function() {
     //     });
 
 
+// okay so now I'm listeneing to the buttons. now maybe wrap each giant if statement and call it depending on which button is checked? I'd need to change the event listener some too. not too big of a deal hopefully.
+  $('form').click(function(e){
+let isChecked = $(e.target)[0].id
+console.log(isChecked);
+
+if(isChecked === 'test1') {
+  console.log(isChecked, "you did it you");
+}
+
+
+})
 
 
 
@@ -66,7 +77,9 @@ $(document).ready(function() {
 
     }
 
-    function calculateAndDisplayRoute(origin, destination, directionService, directionDisplay, map) {
+
+if($('#test1')[0].checked) {
+    function calculateAndDisplayRoute1(origin, destination, directionService, directionDisplay, map) {
         directionService.route({
             origin: origin,
             destination: destination,
@@ -91,7 +104,7 @@ $(document).ready(function() {
         }, function(response, status) {
             if (status === google.maps.DirectionsStatus.OK) {
                 renderDirections(response, map);
-                let busDisplay = directionsDisplay.setDirections(response)
+                // let busDisplay = directionsDisplay.setDirections(response)
             } else {
                 window.alert('Directions request failed due to ' + status);
             }
@@ -101,8 +114,6 @@ $(document).ready(function() {
 
     // OKAY. can I make a radio button box where the user can bike which leg of the trip they want to see directions for? With the first leg being the default. Would have have to make a third calculateAndDisplayRoute? I guess that isn't the worst
     // setRouteIndex(routeIndex:number)
-
-
 
 
     function initMap() {
@@ -124,17 +135,223 @@ $(document).ready(function() {
 
 
         // call first route
-        calculateAndDisplayRoute(new google.maps.LatLng(40.0722083, -105.5083316), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
+        calculateAndDisplayRoute1(new google.maps.LatLng(40.0722083, -105.5083316), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
 
         // call bus route
         calculateAndDisplayBusRoute(new google.maps.LatLng(40.016779, -105.276376), new google.maps.LatLng(39.753931, -105.001159), directionsService, directionsDisplay, map)
 
         // call second route
-        calculateAndDisplayRoute(new google.maps.LatLng(39.753931, -105.001159), new google.maps.LatLng(39.7367179, -104.9847337), directionsService, directionsDisplay, map)
+        calculateAndDisplayRoute1(new google.maps.LatLng(39.753931, -105.001159), new google.maps.LatLng(39.7367179, -104.9847337), directionsService, directionsDisplay, map)
 
     }
     //  }
+  } // end of first if
 
+  if($('#test1')[0].checked) {
+      function calculateAndDisplayRoute1(origin, destination, directionService, directionDisplay, map) {
+          directionService.route({
+              origin: origin,
+              destination: destination,
+              travelMode: google.maps.TravelMode.BICYCLING,
+              provideRouteAlternatives: false
+          }, function(response, status) {
+              if (status === google.maps.DirectionsStatus.OK) {
+                  renderDirections(response, map);
+                let bikeDisplay = directionsDisplay.setDirections(response)
+              } else {
+                  window.alert('Directions request failed due to ' + status);
+              }
+          });
+      }
+
+      function calculateAndDisplayBusRoute(origin, destination, directionService, directionDisplay, map) {
+          directionService.route({
+              origin: origin,
+              destination: destination,
+              travelMode: google.maps.TravelMode.TRANSIT,
+              provideRouteAlternatives: false
+          }, function(response, status) {
+              if (status === google.maps.DirectionsStatus.OK) {
+                  renderDirections(response, map);
+                  // let busDisplay = directionsDisplay.setDirections(response)
+              } else {
+                  window.alert('Directions request failed due to ' + status);
+              }
+          });
+      }
+
+
+      // OKAY. can I make a radio button box where the user can bike which leg of the trip they want to see directions for? With the first leg being the default. Would have have to make a third calculateAndDisplayRoute? I guess that isn't the worst
+      // setRouteIndex(routeIndex:number)
+
+
+      function initMap() {
+          directionsDisplay = new google.maps.DirectionsRenderer();
+          directionsDisplay2 = new google.maps.DirectionsRenderer()
+          map = new google.maps.Map(
+              document.getElementById("map"), {
+                  center: new google.maps.LatLng(40.0722083, -105.5083316),
+                  zoom: 13,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+              });
+          directionsDisplay.setMap(map);
+          directionsDisplay.setPanel(document.getElementById('panelOne'))
+
+
+
+          //something would need to be changed here to get it to display a three peice route
+
+
+
+          // call first route
+          calculateAndDisplayRoute1(new google.maps.LatLng(40.0722083, -105.5083316), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
+
+          // call bus route
+          calculateAndDisplayBusRoute(new google.maps.LatLng(40.016779, -105.276376), new google.maps.LatLng(39.753931, -105.001159), directionsService, directionsDisplay, map)
+
+          // call second route
+          calculateAndDisplayRoute1(new google.maps.LatLng(39.753931, -105.001159), new google.maps.LatLng(39.7367179, -104.9847337), directionsService, directionsDisplay, map)
+
+      }
+      //  }
+    } // end of first if
+
+      else if($(test2)[0].checked) {
+        function calculateAndDisplayRoute1(origin, destination, directionService, directionDisplay, map) {
+            directionService.route({
+                origin: origin,
+                destination: destination,
+                travelMode: google.maps.TravelMode.BICYCLING,
+                provideRouteAlternatives: false
+            }, function(response, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    renderDirections(response, map);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+
+        function calculateAndDisplayBusRoute(origin, destination, directionService, directionDisplay, map) {
+            directionService.route({
+                origin: origin,
+                destination: destination,
+                travelMode: google.maps.TravelMode.TRANSIT,
+                provideRouteAlternatives: false
+            }, function(response, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    renderDirections(response, map);
+                    let busDisplay = directionsDisplay.setDirections(response)
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+
+
+        function initMap() {
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            directionsDisplay2 = new google.maps.DirectionsRenderer()
+            map = new google.maps.Map(
+                document.getElementById("map"), {
+                    center: new google.maps.LatLng(40.0722083, -105.5083316),
+                    zoom: 13,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById('panelOne'))
+
+            // call first route
+            calculateAndDisplayRoute1(new google.maps.LatLng(40.0722083, -105.5083316), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
+
+            // call bus route
+            calculateAndDisplayBusRoute(new google.maps.LatLng(40.016779, -105.276376), new google.maps.LatLng(39.753931, -105.001159), directionsService, directionsDisplay, map)
+
+            // call second route
+            calculateAndDisplayRoute1(new google.maps.LatLng(39.753931, -105.001159), new google.maps.LatLng(39.7367179, -104.9847337), directionsService, directionsDisplay, map)
+
+        }
+
+      }// end of second if
+
+    else if($(test3)[0].checked) {
+      function calculateAndDisplayRoute1(origin, destination, directionService, directionDisplay, map) {
+          directionService.route({
+              origin: origin,
+              destination: destination,
+              travelMode: google.maps.TravelMode.BICYCLING,
+              provideRouteAlternatives: false
+          }, function(response, status) {
+              if (status === google.maps.DirectionsStatus.OK) {
+                  renderDirections(response, map);
+              } else {
+                  window.alert('Directions request failed due to ' + status);
+              }
+          });
+      }
+
+      function calculateAndDisplayBusRoute(origin, destination, directionService, directionDisplay, map) {
+          directionService.route({
+              origin: origin,
+              destination: destination,
+              travelMode: google.maps.TravelMode.TRANSIT,
+              provideRouteAlternatives: false
+          }, function(response, status) {
+              if (status === google.maps.DirectionsStatus.OK) {
+                  renderDirections(response, map);
+                  // let busDisplay = directionsDisplay.setDirections(response)
+              } else {
+                  window.alert('Directions request failed due to ' + status);
+              }
+          });
+      }
+
+      function calculateAndDisplayRoute2(origin, destination, directionService, directionDisplay, map) {
+          directionService.route({
+              origin: origin,
+              destination: destination,
+              travelMode: google.maps.TravelMode.BICYCLING,
+              provideRouteAlternatives: false
+          }, function(response, status) {
+              if (status === google.maps.DirectionsStatus.OK) {
+                  renderDirections(response, map);
+                let bikeDisplay2 = directionsDisplay.setDirections(response)
+              } else {
+                  window.alert('Directions request failed due to ' + status);
+              }
+          });
+      }
+
+      function initMap() {
+          directionsDisplay = new google.maps.DirectionsRenderer();
+          directionsDisplay2 = new google.maps.DirectionsRenderer()
+          map = new google.maps.Map(
+              document.getElementById("map"), {
+                  center: new google.maps.LatLng(40.0722083, -105.5083316),
+                  zoom: 13,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+              });
+          directionsDisplay.setMap(map);
+          directionsDisplay.setPanel(document.getElementById('panelOne'))
+
+
+
+          //something would need to be changed here to get it to display a three peice route
+
+
+
+          // call first route
+          calculateAndDisplayRoute1(new google.maps.LatLng(40.0722083, -105.5083316), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
+
+          // call bus route
+          calculateAndDisplayBusRoute(new google.maps.LatLng(40.016779, -105.276376), new google.maps.LatLng(39.753931, -105.001159), directionsService, directionsDisplay, map)
+
+          // call second route
+          calculateAndDisplayRoute2(new google.maps.LatLng(39.753931, -105.001159), new google.maps.LatLng(39.7367179, -104.9847337), directionsService, directionsDisplay, map)
+
+      }
+
+    }// end of second if
     initMap()
 })
 // Get the ball rolling and trigger our init() on 'load'

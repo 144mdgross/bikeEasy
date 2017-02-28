@@ -20,20 +20,20 @@ main {
 }
 
 #mode-selector {
-  display: none;
+  /*display: none;*/
 }
 
 #map {
-  height: 300px;
-  width: 800px;
+  height: 20em;
+  width: 55em;
   margin: 10px;
   /*width: 100%;*/
 
 }
 
 #panelOne {
-  height: 300px;
-  width: 300px;
+  height: 20em;
+  width: 55em;
   margin: 10px;
   overflow: scroll;
 }
@@ -50,6 +50,9 @@ main {
   width: 300px;
   margin: 10px;
   overflow: scroll;
+}
+
+#panel-selector {
 }
 
 /*html, body {

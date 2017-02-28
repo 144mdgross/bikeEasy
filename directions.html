@@ -63,9 +63,9 @@
 
     <main>
         <!-- <div class="container"> -->
-            <h1 class="header center">the places you'll go</h1>
-            <!-- TYPE CONTROLS -->
-            <div id="mode-selector" class="controls">
+        <h1 class="header center">the places you'll go</h1>
+        <!-- TYPE CONTROLS -->
+        <!-- <div id="mode-selector" class="controls">
                 <input type="radio" name="type" id="changemode-walking" checked="checked">
                 <label for="changemode-walking">Walking</label>
 
@@ -74,101 +74,126 @@
 
                 <input type="radio" name="type" id="changemode-driving">
                 <label for="changemode-driving">Driving</label>
-            </div>
-            <!-- END OF TYPE CONTROLS -->
-            <!-- MAP -->
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 m12 l6">
-                        <div id="map"></div>
-                    </div>
+            </div> -->
+        <!-- END OF TYPE CONTROLS -->
+        <!-- MAP -->
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l6">
+                    <div id="map"></div>
                 </div>
             </div>
-            <!-- END OF MAP -->
+        </div>
+        <!-- END OF MAP -->
 
-            <!-- DIRECTIONS PANEL ONE -->
-            <div class="container">
-                <div class="row">
-                    <div class="col s4 m4 l4">
-                        <div id='panelOne'></div>
-                    </div>
-            <!-- END OF DIRECTIONS PANEL ONE-->
+<div class="container">
 
-            <!-- DIRECTIONS PANEL TWO-->
-                    <div class="col s4 m4 l4">
+
+        <form action="#">
+            <p>
+                <input name="group1" type="radio" id="test1"/>
+                <label for="test1">Red</label>
+            </p>
+            <p>
+                <input name="group1" type="radio" id="test2" checked="checked"/>
+                <label for="test2">Yellow</label>
+            </p>
+            <p>
+                <input class="with-gap" name="group1" type="radio" id="test3"/>
+                <label for="test3">Green</label>
+            </p>
+            <p>
+                <input name="group1" type="radio" id="test4" disabled="disabled" />
+                <label for="test4">Brown</label>
+            </p>
+        </form>
+</div>
+
+        <!-- DIRECTIONS PANEL ONE -->
+        <div class="container">
+            <div class="row">
+                <div class="col s4 m4 l4">
+                    <div id='panelOne'></div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF DIRECTIONS PANEL ONE-->
+
+        <!-- DIRECTIONS PANEL TWO-->
+        <!-- <div class="col s4 m4 l4">
                         <div id='panelTwo'></div>
-                    </div>
-            <!-- END OF DIRECTIONS PANEL TWO-->
+                    </div> -->
+        <!-- END OF DIRECTIONS PANEL TWO-->
 
-            <!-- DIRECTIONS PANEL THREE-->
-                    <div class="col s4 m4 l4">
+        <!-- DIRECTIONS PANEL THREE-->
+        <!-- <div class="col s4 m4 l4">
                         <div id='panelThree'></div>
                     </div>
                 </div>
-            </div>
-            <!-- END OF DIRECTIONS PANEL THREE-->
+            </div> -->
+        <!-- END OF DIRECTIONS PANEL THREE-->
 
 
-            <!-- BOULDER TO DENVER, DENVER TO BOULDER SELECT box -->
-            <div class="row">
-                <div class="input-field col s12 m12 l12">
-                    <select>
+        <!-- BOULDER TO DENVER, DENVER TO BOULDER SELECT box -->
+        <div class="row">
+            <div class="input-field col s12 m12 l12">
+                <select>
           <option value="Boulder-Denver" selected>Boulder to Denver</option>
           <option value="Denver-Boulder">Denver to Boulder</option>
       </select>
-                    <label>Which Way?</label>
-                </div>
+                <label>Which Way?</label>
             </div>
-            <!-- END OF SELECT BOXES -->
+        </div>
+        <!-- END OF SELECT BOXES -->
 
-            <!-- START INPUT -->
-            <div class="row">
-                <div class="input-field col s12 m12 l12">
-                    <input id="origin-input" placeholder="1313 Mockingbird Lane" class="controls" type="text" required>
-                    <label class="active" for="Leave-From">Leave From</label>
-                </div>
-                <div class="input-field col s12 m12 l12">
-                    <input id="destination-input" placeholder="1407 Graymalkin Lane, Salem Center, New York" class="controls" type="text" required>
-                    <label class="active" for="Arrive-At">Arrive At</label>
-                </div>
+        <!-- START INPUT -->
+        <div class="row">
+            <div class="input-field col s12 m12 l12">
+                <input id="origin-input" placeholder="1313 Mockingbird Lane" class="controls" type="text" required>
+                <label class="active" for="Leave-From">Leave From</label>
             </div>
-            <!-- SELECT BOX ARRIVE/DEPART -->
-            <div class="row">
-                <div class="input-field col s16 m6 l6">
-                    <select>
+            <div class="input-field col s12 m12 l12">
+                <input id="destination-input" placeholder="1407 Graymalkin Lane, Salem Center, New York" class="controls" type="text" required>
+                <label class="active" for="Arrive-At">Arrive At</label>
+            </div>
+        </div>
+        <!-- SELECT BOX ARRIVE/DEPART -->
+        <div class="row">
+            <div class="input-field col s16 m6 l6">
+                <select>
           <option value="1" selected>arrive by</option>
           <option value="2">depart at</option>
           <!-- explore options is very optional -->
           <!-- <option value="3">explore options</option> -->
       </select>
-                    <label><i class="material-icons">directions_bike</i></label>
-                </div>
+                <label><i class="material-icons">directions_bike</i></label>
+            </div>
 
             <!-- END OF SELECT BOX ARRIVE/DEPART -->
 
             <!-- TIME SELECT BOX -->
 
-                <div class="input-field col s6 m6 l6">
-                    <select>
+            <div class="input-field col s6 m6 l6">
+                <select>
             <!-- is there a better way to do this? dymanically? yes. -->
             <option value="13" selected>13:00</option>
             <option value="14">14:00</option>
             <option value="15" selected>15:00</option>
             <option value="16">16:00</option>
         </select>
-                    <label><i class="material-icons">access_time</i></label>
-                </div>
+                <label><i class="material-icons">access_time</i></label>
             </div>
-            <!-- END OF SELECT BOX -->
+        </div>
+        <!-- END OF SELECT BOX -->
 
-            <!-- button -->
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 m12 l12">
-                        <a id="submit" class="waves-effect waves-light btn-large center-align"><i class="material-icons left">cloud</i>button</a>
-                    </div>
+        <!-- button -->
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <a id="submit" class="waves-effect waves-light btn-large center-align"><i class="material-icons left">cloud</i>button</a>
                 </div>
             </div>
+        </div>
 
         <!-- </div> -->
 
