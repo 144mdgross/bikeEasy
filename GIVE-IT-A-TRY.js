@@ -1,6 +1,11 @@
 let map
 let directionsService
 let directionsDisplay
+var originAutocomplete
+var originLatitude
+var longitude
+var address1
+var address2
 
 
 $(document).ready(function() {
@@ -9,8 +14,41 @@ $(document).ready(function() {
   // initialize side-nav
   $(".button-collapse").sideNav()
 
+  // FUNCTION TO GEOCODE LATLNG FROM ADDRESS
+  function GetLatlongOrigin()
+  {
+      var geocoder = new google.maps.Geocoder();
+      address1 = document.getElementById('origin-input').value;
 
 
+      geocoder.geocode({ 'address': address1 }, function (results, status) {
+
+          if (status == google.maps.GeocoderStatus.OK) {
+              originLatitude = results[0].geometry.location.lat();
+              console.log(latitude, "latitude origin")
+              originLongitude = results[0].geometry.location.lng();
+              console.log(longitude, "longitude origin")
+
+          }
+      });
+}
+
+function GetLatlongDestination()
+{
+    var geocoder = new google.maps.Geocoder();
+    address2 = document.getElementById('destination-input').value;
+
+    geocoder.geocode({ 'address': address2 }, function (results, status) {
+
+        if (status == google.maps.GeocoderStatus.OK) {
+            var latitude = results[0].geometry.location.lat();
+            console.log(latitude, "latitude destination")
+            var longitude = results[0].geometry.location.lng();
+            console.log(longitude, "longitude destination")
+
+        }
+    });
+}
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             mapTypeControl: false,
@@ -28,48 +66,27 @@ $(document).ready(function() {
      * @constructor
      */
     function AutocompleteDirectionsHandler(map) {
+        //  necessary
         this.map = map;
         this.originPlaceId = null;
         this.destinationPlaceId = null;
-        this.travelMode = 'TRANSIT';
         var originInput = document.getElementById('origin-input');
         var destinationInput = document.getElementById('destination-input');
-        var modeSelector = document.getElementById('mode-selector');
-        this.directionsService = new google.maps.DirectionsService;
-        this.directionsDisplay = new google.maps.DirectionsRenderer;
-        this.directionsDisplay.setMap(map);
 
-        var originAutocomplete = new google.maps.places.Autocomplete(
+        originAutocomplete = new google.maps.places.Autocomplete(
             originInput, {
-                placeIdOnly: true
+                placeIdOnly: false
             });
         var destinationAutocomplete = new google.maps.places.Autocomplete(
             destinationInput, {
-                placeIdOnly: true
+                placeIdOnly: false
             });
-
-        this.setupClickListener('changemode-walking', 'WALKING');
-        this.setupClickListener('changemode-transit', 'TRANSIT');
-        this.setupClickListener('changemode-driving', 'DRIVING');
 
         this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
         this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
 
-        /*this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
-        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
-        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);*/
     }
 
-    // Sets a listener on a radio button to change the filter type on Places
-    // Autocomplete.
-    AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
-        var radioButton = document.getElementById(id);
-        var me = this;
-        radioButton.addEventListener('click', function() {
-            me.travelMode = mode;
-            me.route();
-        });
-    };
 
     AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
         var me = this;
@@ -82,36 +99,17 @@ $(document).ready(function() {
             }
             if (mode === 'ORIG') {
                 me.originPlaceId = place.place_id;
+                GetLatlongOrigin()
             } else {
                 me.destinationPlaceId = place.place_id;
+                GetLatlongDestination()
             }
-            me.route();
+
         });
 
     };
 
-    AutocompleteDirectionsHandler.prototype.route = function() {
-        if (!this.originPlaceId || !this.destinationPlaceId) {
-            return;
-        }
-        var me = this;
-
-        this.directionsService.route({
-            origin: {
-                'placeId': this.originPlaceId
-            },
-            destination: {
-                'placeId': this.destinationPlaceId
-            },
-            travelMode: this.travelMode
-        }, function(response, status) {
-            if (status === 'OK') {
-                me.directionsDisplay.setDirections(response);
-            } else {
-                window.alert('Directions request failed due to ' + status);
-            }
-        });
-    }
 
     initMap()
+
 })
