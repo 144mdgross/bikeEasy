@@ -5,10 +5,15 @@ $(document).ready(function() {
     $(".button-collapse").sideNav()
 
 
+
+
+
     // manage location in render array
     let map
     let directionsDisplay
     let directionsService = new google.maps.DirectionsService();
+
+    console.log('directionsService', directionsService);
     var directionsRenderer1
     // let directionsRendererOptions = {
     //     suppressInfoWindows: false,
@@ -34,34 +39,47 @@ if(isChecked === 'test1') {
 
 })
 
-
+// $.ajax({
+//   method: 'GET',
+//   url: "http://maps.googleapis.com/maps/api/js?key=AIzaSyC8Lgex8nTqbToDXIyayP-WHEe2ssI6j5c&libraries=places",
+//   success: function(data) {
+//     console.log(succes, "success")
+//   },
+//   error: function () {
+//     console.log('error');
+//   }
+// })
 
 
     function renderDirections(result, map) {
 
         // THIS IS ONLY RENDERING LAST COLOR IN LIST. NBDEAL FOR NOW...ALSO MARKERS ARE DOING WEIRD THINGS. A PROBLEM FOR LATER....
 
-        directionsRenderer1 = new google.maps.DirectionsRenderer({
-          directions: result,
-          routeIndex: 0,
-          map: map,
-          suppressMarkers: true,
-          polylineOptions: {
-            strokeColor: "green"
-          }
-        });
-        console.log("routeindex1 = ", directionsRenderer1.getRouteIndex());
-
-        var directionsRenderer2 = new google.maps.DirectionsRenderer({
-          directions: result,
-          routeIndex: 1,
-          map: map,
-          suppressMarkers: true,
-          polylineOptions: {
-            strokeColor: "blue"
-          }
-        });
-        console.log("routeindex2 = ", directionsRenderer2.getRouteIndex()); //line 17
+        // directionsRenderer1 = new google.maps.DirectionsRenderer({
+        //   directions: result,
+        //   routeIndex: 0,
+        //   map: map,
+        //   suppressMarkers: true,
+        //   polylineOptions: {
+        //     strokeColor: "green"
+        //   }
+        // });
+        // console.log("routeindex1 = ", directionsRenderer1.getRouteIndex());
+        // console.log(directionsRenderer1.directions.routes[0].legs[0].steps[0].instructions, "route 1");
+        // let instructionsArray = []
+        //
+        //
+        // var directionsRenderer2 = new google.maps.DirectionsRenderer({
+        //   directions: result,
+        //   routeIndex: 1,
+        //   map: map,
+        //   suppressMarkers: true,
+        //   polylineOptions: {
+        //     strokeColor: "blue"
+        //   }
+        // });
+        // console.log("routeindex2 = ", directionsRenderer2.getRouteIndex()); //line 17
+        // console.log(directionsRenderer2.directions.routes[0].legs[0].steps, "route 2");
 
         var directionsRenderer3 = new google.maps.DirectionsRenderer({
             directions: result,
@@ -73,6 +91,7 @@ if(isChecked === 'test1') {
             }
         });
         console.log("routeindex3 = ", directionsRenderer3.getRouteIndex());
+        console.log(directionsRenderer3.directions.routes[0], "directions Renderer");
 
 
     }

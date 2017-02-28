@@ -21,7 +21,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Lgex8nTqbToDXIyayP-WHEe2ssI6j5c&libraries=places"></script>
 
     <!-- my js-->
-    <script src="multiple-route-trial.js" charset="utf-8"></script>
+    <script src="click-change-panel.js" charset="utf-8"></script>
 
     <!-- my stylesheet -->
     <link rel="stylesheet" href="bike.css">
@@ -86,51 +86,74 @@
         </div>
         <!-- END OF MAP -->
 
-<div class="container">
-
-
-        <form action="#">
-            <p>
-                <input name="group1" type="radio" id="test1"/>
-                <label for="test1">Red</label>
-            </p>
-            <p>
-                <input name="group1" type="radio" id="test2" checked="checked"/>
-                <label for="test2">Yellow</label>
-            </p>
-            <p>
-                <input class="with-gap" name="group1" type="radio" id="test3"/>
-                <label for="test3">Green</label>
-            </p>
-            <p>
-                <input name="group1" type="radio" id="test4" disabled="disabled" />
-                <label for="test4">Brown</label>
-            </p>
-        </form>
-</div>
-
         <!-- DIRECTIONS PANEL ONE -->
         <div class="container">
             <div class="row">
-                <div class="col s4 m4 l4">
-                    <div id='panelOne'></div>
+                <div class="col s12 m4 l4">
+                  <h5 class="center">Bike to Bus</h5>
+                    <table id='panelOne' class="striped">
+                        <thead>
+                            <tr>
+                                <th class="warning"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td id="copyright1"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+
+                <!-- END OF DIRECTIONS PANEL ONE-->
+
+                <!-- DIRECTIONS PANEL TWO-->
+                <div class="col s12 m4 l4">
+                  <h5 class="center">Bus Route</h5>
+                    <table id='panelTwo' class="striped">
+                        <thead>
+                            <tr>
+                                <th class="warning"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td id="copyright2"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+                <!-- END OF DIRECTIONS PANEL TWO-->
+
+                <!-- DIRECTIONS PANEL THREE-->
+                <div class="col s12 m4 l4">
+                  <h5 class="center">Bike to Destination</h5>
+                    <table id='panelThree' class="striped">
+                        <thead>
+                            <tr>
+                                <th class="warning"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td id="copyright3"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
                 </div>
             </div>
+            <!-- end of row div -->
         </div>
-        <!-- END OF DIRECTIONS PANEL ONE-->
-
-        <!-- DIRECTIONS PANEL TWO-->
-        <!-- <div class="col s4 m4 l4">
-                        <div id='panelTwo'></div>
-                    </div> -->
-        <!-- END OF DIRECTIONS PANEL TWO-->
-
-        <!-- DIRECTIONS PANEL THREE-->
-        <!-- <div class="col s4 m4 l4">
-                        <div id='panelThree'></div>
-                    </div>
-                </div>
-            </div> -->
+        <!-- end of container div -->
         <!-- END OF DIRECTIONS PANEL THREE-->
 
 
