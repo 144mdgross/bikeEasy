@@ -144,7 +144,7 @@ $(document).ready(function() {
 
         if ($('#origin-input').val().includes('Boulder')) {
             if (placeId === "Ei0xNDAxLTE0NDMgQ2FueW9uIEJsdmQsIEJvdWxkZXIsIENPIDgwMzAyLCBVU0E") {
-                $('#panelTwo th').html(warning)
+                $('#panelTwo .warning').html(warning)
                 $('#copyright2').html(copyright)
 
                 let row2 = $('<tr>')
@@ -160,7 +160,7 @@ $(document).ready(function() {
                 $('#panelTwo tbody').append(row2)
 
                 //  loop through steps
-                for (var i = 0; i < steps.length; i++) {
+                for (var i = 1; i < steps.length; i++) {
                     let instruction = steps[i].instructions
                     let row = $('<tr>')
                     row.html(instruction)
@@ -172,7 +172,7 @@ $(document).ready(function() {
                     // console.log(instruction);
                 }
             } else if (placeId === "ChIJ58F9ysN4bIcRm4CacOXarfI") {
-                $('#panelThree th').text(warning)
+                $('#panelThree .warning').text(warning)
                 $('#copyright3').text(copyright)
 
                 let row3 = $('<tr>')
@@ -201,7 +201,7 @@ $(document).ready(function() {
                 }
 
             } else {
-                $('#panelOne th').text(warning)
+                $('#panelOne .warning').text(warning)
                 $('#copyright1').text(copyright)
 
                 let row1 = $('<tr>')
@@ -232,7 +232,7 @@ $(document).ready(function() {
               // log(placeId, "is anything getting through?")
               // ChIJZTYRctV-bIcRb74MCUMHUzQ
               // ChIJ-3hMUcJ4bIcRuaidfDaWTnY
-                $('#panelTwo th').html(warning)
+                $('#panelTwo .warning').html(warning)
                 $('#copyright2').html(copyright)
 
 
@@ -250,7 +250,7 @@ $(document).ready(function() {
 
 
                 //  loop through steps
-                for (var i = 0; i < steps.length; i++) {
+                for (var i = 1; i < steps.length; i++) {
                     let instruction = steps[i].instructions
                     let row = $('<tr>')
                     row.html(instruction)
@@ -258,7 +258,7 @@ $(document).ready(function() {
                     $('#panelTwo tbody').append(row)
                 }
             } else if (placeId === "Ei0xNDAxLTE0NDMgQ2FueW9uIEJsdmQsIEJvdWxkZXIsIENPIDgwMzAyLCBVU0E") {
-                $('#panelThree th').text(warning)
+                $('#panelThree .warning').text(warning)
                 $('#copyright3').text(copyright)
 
                 let row3 = $('<td>')
@@ -285,7 +285,7 @@ $(document).ready(function() {
                     // console.log(instruction);
                 }
             } else {
-                $('#panelOne th').text(warning)
+                $('#panelOne .warning').text(warning)
                 $('#copyright1').text(copyright)
 
                 let row1 = $('<tr>')
@@ -364,23 +364,14 @@ $(document).ready(function() {
 
     initMap()
 
-
-    // // calculateAndDisplayRoute(new google.maps.LatLng(originLatitude, originLongitude), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
-    // calculateAndDisplayRoute(new google.maps.LatLng(40.0722083, -105.5083316), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
-    //
-    // // call bus route
-    // calculateAndDisplayBusRoute(new google.maps.LatLng(40.016779, -105.276376), new google.maps.LatLng(39.753931, -105.001159), directionsService, directionsDisplay, map)
-    //
-    // // call second route
-    // // calculateAndDisplayRoute(new google.maps.LatLng(destinationLatitude, destinationLongitude), new google.maps.LatLng(39.7367179, -104.9847337), directionsService, directionsDisplay, map)
-    // calculateAndDisplayRoute(new google.maps.LatLng(39.753931, -105.001159), new google.maps.LatLng(39.7367179, -104.9847337), directionsService, directionsDisplay, map)
-
-    //  SOOOO. I NEED AN EVENT LISTENER THAT WILL CALL THESE FUNTCIONS W/ THEIR VARIABLES WHEN THE USER HITS SUBMIT, AND ERROR CONTROL SO THAT IF IT'S EMPTY IT WON'T DO ANYTHING.
     $('#submit').click(function(e) {
         e.target = this
         if ($('#origin-input').val() === "" || $('#destination-input').val() === "") {
             Materialize.toast('I am a toast!', 4000, 'toast-class')
         } else {
+            $('#totals').removeClass('hide')
+            $('#directions-tables').removeClass('hide')
+
             $('tbody').empty()
 
             if ($('#origin-input').val().includes('Boulder') && $('#destination-input').val().includes('Denver')) {
@@ -407,6 +398,33 @@ $(document).ready(function() {
 
         }
     }) // end of click
+
+  // call ajax for Boulder (id "boulder-weather")
+    // $.ajax({
+    //   method: 'GET',
+    //   url: 'http://api.openweathermap.org/data/2.5/weather?lat=40.017512&lon=-105.28561100000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05',
+    //   dataType: 'json',
+    //   success: function(data){
+    //     console.log("success!", data);
+    //   },
+    //   error: function(){
+    //     console.log('error');
+    //   }
+    // })
+    //
+    // // call ajax for Denver (id "denver-weather")
+    // $.ajax({
+    //   method: 'GET',
+    //   url: `http://api.openweathermap.org/data/2.5/forecast?lat=39.7366466&lon=-104.98454900000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05`,
+    //   dataType: 'json',
+    //   success: function(data){
+    //     console.log("success!", data);
+    //   },
+    //   error: function(){
+    //     console.log('error');
+    //   }
+    // })
+
 
 })
 // Get the ball rolling and trigger our init() on 'load'

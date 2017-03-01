@@ -20,6 +20,12 @@
     <!-- it also appears that I don't need the async and defer tags here either. since $(doc).ready -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Lgex8nTqbToDXIyayP-WHEe2ssI6j5c&libraries=places"></script>
 
+    <!-- my google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+
+      <!-- little icon in the title -->
+      <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/54-200.png">
+
     <!-- my js-->
     <script src="auto-complete-trial.js" charset="utf-8"></script>
 
@@ -33,8 +39,8 @@
     <header>
         <nav>
             <div class="nav-wrapper">
-                <a href="#!" class="brand-logo left">bike easy</a>
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">dehaze</i></a>
+                <a href="#!" class="brand-logo">bike easy</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">cloud</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="sass.html">Saved Routes</a></li>
                     <li><a href="badges.html">Weather</a></li>
@@ -47,15 +53,30 @@
                             <div class="background">
                                 <img src="https://s-media-cache-ak0.pinimg.com/originals/fd/bf/1d/fdbf1dc2a48d96023b21a3002ddc3198.jpg">
                             </div>
-                            <a href="#!user"><img class="circle" src="https://s-media-cache-ak0.pinimg.com/736x/97/35/5a/97355afdf2fba89ef5dc60590529711c.jpg"></a>
-                            <a href="#!name"><span class="white-text name">John Doe</span></a>
-                            <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                            <img class="circle" src="https://s-media-cache-ak0.pinimg.com/736x/97/35/5a/97355afdf2fba89ef5dc60590529711c.jpg">
+                            <div class="container mobile-nav-box">
+
+                            </div>
                         </div>
                     </li>
-                    <li><a href="sass.html">Saved Routes</a></li>
-                    <li><a href="badges.html">Weather</a></li>
-                    <li><a href="collapsible.html">Travel Preferences</a></li>
-                    <li><a href="mobile.html">App Settings</a></li>
+
+                    <!-- WEATHER CONTAINER -->
+                    <div class="container" id="weather">
+                      <div class="row">
+                        <div class="col s12 m12 l12" id="denver-weather"><h6>
+                          Here
+                        </h6>
+                        </div>
+                        <div class="row">
+                        <div class="col s12 m12 l12" id="boulder-weather"><h6>
+                          There
+                        </h6>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                      <!-- END OF WEATHER CONTAINER -->
+
                 </ul>
             </div>
         </nav>
@@ -127,7 +148,31 @@
 
             <!-- END OF SELECT BOX -->
 
-
+            <!-- OVERALL DIRECTIONS AND SUMMARY. -->
+            <div class="container hide" id="totals">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="center">
+                                        <h5>Total Time</h5></th>
+                                    <th class="center">
+                                        <h5>Distance on Bike</h5></th>
+                                    <th class="center">
+                                        <h5>Total Distance</h5></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- END OF TOTALS. -->
 
         <!-- MAP -->
         <div class="container">
@@ -139,24 +184,25 @@
         </div>
         <!-- END OF MAP -->
 
-
-
         <!-- DIRECTIONS PANEL ONE -->
-        <div class="container">
+        <div class="container hide" id="directions-tables">
             <div class="row">
                 <div class="col s12 m12 l4 table-container">
                     <h5 class="center">Bike</h5>
                     <table id='panelOne'>
-                        <thead>
+                        <!-- <thead>
                             <tr>
                                 <th class="warning"></th>
                             </tr>
-                        </thead>
+                        </thead> -->
                         <tbody>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td id="copyright1"></td>
+                            </tr>
+                            <tr>
+                                <td class="warning"></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -170,16 +216,14 @@
                 <div class="col s12 m12 l4 table-container">
                     <h5 class="center">Then Bus</h5>
                     <table id='panelTwo'>
-                        <thead>
-                            <tr>
-                                <th class="warning"></th>
-                            </tr>
-                        </thead>
                         <tbody>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td id="copyright2"></td>
+                            </tr>
+                            <tr>
+                                <td class="warning"></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -191,16 +235,14 @@
                 <div class="col s12 m12 l4  table-container">
                     <h5 class="center">Then Bike</h5>
                     <table id='panelThree'>
-                        <thead>
-                            <tr>
-                                <th class="warning"></th>
-                            </tr>
-                        </thead>
                         <tbody>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td id="copyright3"></td>
+                            </tr>
+                            <tr>
+                                <td class="warning"></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -212,31 +254,7 @@
         <!-- end of container div -->
         <!-- END OF DIRECTIONS PANEL THREE-->
 
-        <!-- OVERALL DIRECTIONS AND SUMMARY. -->
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m12 l12">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="center">
-                                    <h5>Total Time</h5></th>
-                                <th class="center">
-                                    <h5>Distance on Bike</h5></th>
-                                <th class="center">
-                                    <h5>Total Distance</h5></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <!-- END OF TOTALS. -->
+
 
 
 

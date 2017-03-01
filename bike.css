@@ -11,11 +11,14 @@
   padding: 0;
 }*/
 body{
+  font-family: 'Comfortaa', sans-serif;
 
   /*THIS IS THE ONE I WANT TO USE BUT IS GETTING BAD GATEWAY ERROR*/
 /*background-image: url('http://www.fannone.com/i/2017/02/road-bike-wallpaper-desktop.jpg');*/
 
 background-image: url('http://www.allmacwallpaper.com/get/Retina-MacBook-Pro-15-inch-wallpapers/Bicycle-On-The-City-Street-2880x1800/1711-8.jpg');
+background-position: center;
+/*background-repeat: round;*/
 
 }
 
@@ -39,11 +42,12 @@ main {
   /*background-color: #ACE6CB;*/
   /*background-color: #53A197;*/
   /*background-color: rgba(78, 37, 74, .7);*/
-  background-color: rgba(116, 2, 2, 1);
+  /*background-color: rgba(116, 2, 2, 1);*/
+  background-color: rgba(126, 16, 57, 1);
 }
 
 #foot {
-  background-color: rgba(116, 2, 2, 1);
+  background-color: rgba(126, 16, 57, 1);
 }
 
 .brand-logo{
@@ -63,14 +67,18 @@ input{
   text-overflow: ellipsis;
 }
 
-/*input::-webkit-input-placeholder, input::-moz-placeholder, input:-ms-input-placeholder, input:-moz-placeholder, input: placeholder-shown {
-  color: #cff7e6 !important;
-  opacity: 1 !important;
-}*/
+::-webkit-input-placeholder {
+  color: rgba(150, 237, 201, .8);
+  /*opacity: 1 !important;*/
+  /*color: rgba(115, 36, 61, .7);*/
+}
 
 h1{
   color: white;
   /*background-color: rgba(48, 36, 51, .6);*/
+  margin: 0;
+  padding: 0;
+  font-family: 'Comfortaa', sans-serif;
 }
 
 /*.input-container{
@@ -78,6 +86,12 @@ h1{
 }*/
 .warning{
 
+}
+
+#weather {
+  height: 100%;
+  background-color: #cff7e6;
+  color: black;
 }
 
 .summary{
@@ -95,35 +109,49 @@ h1{
 }
 
 tr:nth-child(even){
-  background-color: rgba(252, 232, 208, .4);
+  /*background-color: rgba(255, 255, 255, 0.53);*/
+  /*background-color: rgba(179, 234, 211, .4);*/
+  background-color: rgba(89, 222, 211, 0.33);
 
 }
 
+/*tr:nth-child(odd){
+  background-color: rgba(179, 234, 211, .4);
+}*/
+
+.mobile-nav-box {
+  height: 6em;
+}
+
 .table-container{
+  font-size: 1em;
   height: 25em;
   overflow: scroll;
-  background-color: rgba(163, 131, 123, 0.55);
+  background-color: rgba(179, 234, 211, .4);
 }
 
 .bike-button{
   padding: 0 1.5em;
 }
 
+
 .toast-class{
   padding: 20em;
 }
 
-/*@media (max-device-width: 480px) {
+@media (max-device-width: 480px) {
   #map {
     width: 100%;
   }
   h1{
-    font-size: 1.2em;
+    font-size: 2em;
   }
+ main {
+   font-size: 1.2em;
+ }
 
 
-
-}*/
+}
 
 /*@media (max-device-width: 768px) {
   #map{
