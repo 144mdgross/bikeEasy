@@ -4,62 +4,78 @@
   -webkit-box-sizing: border-box;
   -moz-box: border-box;
 }
-html, body, main {
-  /*width: 100%;*/
+
+/*html, body, main {
   height: 100%;
   margin: 0;
   padding: 0;
+}*/
+body{
+
+  /*THIS IS THE ONE I WANT TO USE BUT IS GETTING BAD GATEWAY ERROR*/
+/*background-image: url('http://www.fannone.com/i/2017/02/road-bike-wallpaper-desktop.jpg');*/
+
+background-image: url('http://www.allmacwallpaper.com/get/Retina-MacBook-Pro-15-inch-wallpapers/Bicycle-On-The-City-Street-2880x1800/1711-8.jpg');
+
 }
+
 
 main {
-  height: 100%;
+  /*height: 100%;*/
+  background-color: rgba(48, 36, 51, .7);
+
+  /*background-image: url('http://wallsdesk.com/wp-content/uploads/2016/11/Bicycle-Background.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;*/
+
 }
-.map-container{
+/*.map-container{
   height: 100%;
   margin: 0;
   padding: 0;
+}*/
+
+.nav-wrapper, page-footer {
+  /*background-color: #ACE6CB;*/
+  /*background-color: #53A197;*/
+  /*background-color: rgba(78, 37, 74, .7);*/
+  background-color: rgba(116, 2, 2, 1);
 }
 
-#submit{
-  margin-right: -45%;
+#foot {
+  background-color: rgba(116, 2, 2, 1);
 }
 
-#mode-selector {
-  /*display: none;*/
+.brand-logo{
+    color: black;
 }
 
 #map {
-  height: 15em;
+  height: 17em;
   /*height: 20em;
   margin: 10px;*/
-  width: 100%;
+  /*width: 60em;*/
 
 }
 
-#panelOne {
-  /*height: 20px;
-  margin: 10px;
-  overflow: scroll;*/
-  /*display: none;*/
+input{
+  color: white;
+  text-overflow: ellipsis;
 }
 
-#panelTwo {
-  /*height: 300px;
-  width: 300px;
-  margin: 10px;*/
-  overflow: scroll;
-  /*display: none;*/
+/*input::-webkit-input-placeholder, input::-moz-placeholder, input:-ms-input-placeholder, input:-moz-placeholder, input: placeholder-shown {
+  color: #cff7e6 !important;
+  opacity: 1 !important;
+}*/
+
+h1{
+  color: white;
+  /*background-color: rgba(48, 36, 51, .6);*/
 }
 
-#panelThree {
-  /*height: 300px;
-  width: 300px;
-  margin: 10px;*/
-  overflow: scroll;
-  /*display: none;*/
-}
-
-
+/*.input-container{
+  background-color: rgba(48, 36, 51, .6);
+}*/
 .warning{
 
 }
@@ -68,7 +84,7 @@ main {
 
 }
 .distance{
-  
+
 }
 .advanced-options{
   display: none;
@@ -78,9 +94,42 @@ main {
   display: none;
 }
 
+tr:nth-child(even){
+  background-color: rgba(252, 232, 208, .4);
+
+}
+
+.table-container{
+  height: 25em;
+  overflow: scroll;
+  background-color: rgba(163, 131, 123, 0.55);
+}
+
+.bike-button{
+  padding: 0 1.5em;
+}
+
 .toast-class{
   padding: 20em;
 }
+
+/*@media (max-device-width: 480px) {
+  #map {
+    width: 100%;
+  }
+  h1{
+    font-size: 1.2em;
+  }
+
+
+
+}*/
+
+/*@media (max-device-width: 768px) {
+  #map{
+    width: 32em;
+  }
+}*/
 /*html, body {
         height: 100%;
         margin: 0;

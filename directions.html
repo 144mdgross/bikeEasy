@@ -33,7 +33,7 @@
     <header>
         <nav>
             <div class="nav-wrapper">
-                <a href="#!" class="brand-logo">bike easy</a>
+                <a href="#!" class="brand-logo left">bike easy</a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">dehaze</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="sass.html">Saved Routes</a></li>
@@ -76,22 +76,77 @@
                 <label for="changemode-driving">Driving</label>
             </div> -->
         <!-- END OF TYPE CONTROLS -->
+        <!-- START INPUT -->
+        <div class="container input-container">
+
+
+        <div class="row" id="input-form">
+            <div class="input-field col s12 m12 l5">
+                <input id="origin-input" placeholder="1313 Mockingbird Lane" class="controls" type="text" required>
+                <label class="active" for="Leave-From">Leave From</label>
+            </div>
+            <div class="input-field col s12 m12 l5">
+                <input id="destination-input" placeholder="1407 Graymalkin Lane, Salem Center, New York" class="controls" type="text" required>
+                <label class="active" for="Arrive-At">Arrive At</label>
+            </div>
+
+                        <!-- button -->
+                        <div class="col s2 m12 l2">
+                            <a id="submit" class="waves-effect waves-light btn-large"><i class="material-icons bike-button">directions_bike</i></a>
+                        </div>
+                    </div>
+              </div>
+
+        <!-- SELECT BOX ARRIVE/DEPART -->
+        <!-- <div class="row advanced-options">
+            <div class="input-field col s16 m6 l6">
+                <select>
+          <option value="1" selected>arrive by</option>
+          <option value="2">depart at</option> -->
+          <!-- explore options is very optional -->
+          <!-- <option value="3">explore options</option> -->
+      <!-- </select>
+                <label><i class="material-icons">directions_bike</i></label>
+            </div>
+          </div> -->
+
+            <!-- END OF SELECT BOX ARRIVE/DEPART -->
+
+            <!-- TIME SELECT BOX -->
+
+            <!-- <div class="input-field col s6 m6 l6">
+                <select> -->
+            <!-- is there a better way to do this? dymanically? yes. -->
+            <!-- <option value="13" selected>13:00</option>
+            <option value="14">14:00</option>
+            <option value="15" selected>15:00</option>
+            <option value="16">16:00</option>
+        </select>
+                <label><i class="material-icons">access_time</i></label>
+            </div> -->
+
+            <!-- END OF SELECT BOX -->
+
+
+
         <!-- MAP -->
         <div class="container">
             <div class="row">
-                <div class="col s12 m12 l6">
+                <div class="col s12 m12 l12">
                     <div id="map"></div>
                 </div>
             </div>
         </div>
         <!-- END OF MAP -->
 
+
+
         <!-- DIRECTIONS PANEL ONE -->
         <div class="container">
             <div class="row">
-                <div class="col s12 m4 l4">
-                  <h5 class="center">Bike to Bus</h5>
-                    <table id='panelOne' class="striped">
+                <div class="col s12 m12 l4 table-container">
+                    <h5 class="center">Bike</h5>
+                    <table id='panelOne'>
                         <thead>
                             <tr>
                                 <th class="warning"></th>
@@ -111,9 +166,10 @@
                 <!-- END OF DIRECTIONS PANEL ONE-->
 
                 <!-- DIRECTIONS PANEL TWO-->
-                <div class="col s12 m4 l4">
-                  <h5 class="center">Bus Route</h5>
-                    <table id='panelTwo' class="striped">
+
+                <div class="col s12 m12 l4 table-container">
+                    <h5 class="center">Then Bus</h5>
+                    <table id='panelTwo'>
                         <thead>
                             <tr>
                                 <th class="warning"></th>
@@ -132,9 +188,9 @@
                 <!-- END OF DIRECTIONS PANEL TWO-->
 
                 <!-- DIRECTIONS PANEL THREE-->
-                <div class="col s12 m4 l4">
-                  <h5 class="center">Bike to Destination</h5>
-                    <table id='panelThree' class="striped">
+                <div class="col s12 m12 l4  table-container">
+                    <h5 class="center">Then Bike</h5>
+                    <table id='panelThree'>
                         <thead>
                             <tr>
                                 <th class="warning"></th>
@@ -156,76 +212,39 @@
         <!-- end of container div -->
         <!-- END OF DIRECTIONS PANEL THREE-->
 
-
-        <!-- BOULDER TO DENVER, DENVER TO BOULDER SELECT box -->
-        <div class="row">
-            <div class="input-field col s12 m12 l12 which-way">
-                <select>
-          <option value="Boulder-Denver" selected>Boulder to Denver</option>
-          <option value="Denver-Boulder">Denver to Boulder</option>
-      </select>
-                <label>Which Way?</label>
-            </div>
-        </div>
-        <!-- END OF SELECT BOXES -->
-
-        <!-- START INPUT -->
-        <div class="row" id="input-form">
-            <div class="input-field col s12 m12 l12">
-                <input id="origin-input" placeholder="1313 Mockingbird Lane" class="controls" type="text" required>
-                <label class="active" for="Leave-From">Leave From</label>
-            </div>
-            <div class="input-field col s12 m12 l12">
-                <input id="destination-input" placeholder="1407 Graymalkin Lane, Salem Center, New York" class="controls" type="text" required>
-                <label class="active" for="Arrive-At">Arrive At</label>
-            </div>
-        </div>
-        <!-- SELECT BOX ARRIVE/DEPART -->
-        <div class="row advanced-options">
-            <div class="input-field col s16 m6 l6">
-                <select>
-          <option value="1" selected>arrive by</option>
-          <option value="2">depart at</option>
-          <!-- explore options is very optional -->
-          <!-- <option value="3">explore options</option> -->
-      </select>
-                <label><i class="material-icons">directions_bike</i></label>
-            </div>
-
-            <!-- END OF SELECT BOX ARRIVE/DEPART -->
-
-            <!-- TIME SELECT BOX -->
-
-            <div class="input-field col s6 m6 l6">
-                <select>
-            <!-- is there a better way to do this? dymanically? yes. -->
-            <option value="13" selected>13:00</option>
-            <option value="14">14:00</option>
-            <option value="15" selected>15:00</option>
-            <option value="16">16:00</option>
-        </select>
-                <label><i class="material-icons">access_time</i></label>
-            </div>
-        </div>
-        <!-- END OF SELECT BOX -->
-
-        <!-- button -->
+        <!-- OVERALL DIRECTIONS AND SUMMARY. -->
         <div class="container">
             <div class="row">
-              <div class="col s4 m4 l4">
-              </div>
-                <div class="col s14 m12 l12">
-                    <a id="submit" class="waves-effect waves-light btn-large"><i class="material-icons left">cloud</i>button</a>
-                </div>
-                <div class="col s4 m4 l4">
+                <div class="col s12 m12 l12">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="center">
+                                    <h5>Total Time</h5></th>
+                                <th class="center">
+                                    <h5>Distance on Bike</h5></th>
+                                <th class="center">
+                                    <h5>Total Distance</h5></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+        <!-- END OF TOTALS. -->
+
+
+
 
         <!-- </div> -->
 
         <!-- FOR SOME REASON THE FOOTER SMASHES THE MAIN CONTENT IF IT ISN'T INSIDE THE MAIN TAG. THIS ONLY SEEMS TO HAPPEN WITH THE MAP PRESENT. -->
-        <footer class="page-footer">
+        <footer class="page-footer" id="foot">
             <div class="container">
                 <div class="row">
                     <div class="col l6 s12">
@@ -244,7 +263,7 @@
             </div>
             <div class="footer-copyright">
                 <div class="container">
-                    © 2014 Megan Gross
+                    © 2017 Megan Gross
                     <a class="grey-text text-lighten-4 right" href="#!">Credit APIs here?</a>
                 </div>
             </div>
