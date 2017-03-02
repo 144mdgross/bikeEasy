@@ -77,8 +77,9 @@ h1{
   color: white;
   /*background-color: rgba(48, 36, 51, .6);*/
   margin: 0;
-  padding: 0;
+  padding: .5em;
   font-family: 'Comfortaa', sans-serif;
+
 }
 
 /*.input-container{
@@ -100,6 +101,9 @@ h1{
 .distance{
 
 }
+
+
+
 .advanced-options{
   display: none;
 }
@@ -113,6 +117,10 @@ tr:nth-child(even){
   /*background-color: rgba(179, 234, 211, .4);*/
   background-color: rgba(89, 222, 211, 0.33);
 
+}
+
+#boulder-weather tr:nth-child(odd) {
+  background-color: rgba(115, 36, 61, .3);
 }
 
 /*tr:nth-child(odd){
@@ -134,9 +142,37 @@ tr:nth-child(even){
   padding: 0 1.5em;
 }
 
+.side-nav, #weather{
+  font-size: 1em;
+  background-image: url('http://bgfons.com/upload/clouds_texture2915.jpg');
+  background-position: center;
+}
+
+.weather-scroll{
+  height: 20em;
+  overflow: scroll;
+}
+
+#boulder-weather-label {
+  background-color: rgba(115, 36, 61, .3);
+}
+/*#weatherTwo{
+  background-color: rgba(115, 36, 61, .3);
+}*/
+
+#totals{
+  color: whitesmoke;
+}
+
+label{
+  font-size: 3em;
+}
 
 .toast-class{
-  padding: 20em;
+  padding: 5em;
+  background-color: rgba(153, 0, 48, .6);
+  color: black;
+  font-size: 3em;
 }
 
 @media (max-device-width: 480px) {
@@ -144,13 +180,21 @@ tr:nth-child(even){
     width: 100%;
   }
   h1{
-    font-size: 2em;
-    padding: .1em;
-    margin: .1em 0em;
+    font-size: 2.5em;
+    padding: .2em;
+    margin: 0;
   }
  main {
    font-size: 1.2em;
  }
+
+ .toast-class{
+   padding: 3em;
+   background-color: rgba(153, 0, 48, .6);
+   color: black;
+   font-size: 2em;
+ }
+
 
 
 }

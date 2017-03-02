@@ -6,6 +6,9 @@
     <!-- material icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <!-- font awesome -->
+    <script src="https://use.fontawesome.com/ae2df0c76f.js"></script>
+
     <!-- jquery 3.1.1 min -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
@@ -31,7 +34,7 @@
 
     <!-- my stylesheet -->
     <link rel="stylesheet" href="bike.css">
-    <title>Bike Easy</title>
+    <title>bike easy</title>
 </head>
 
 
@@ -41,10 +44,10 @@
 
 
             <div class="nav-wrapper">
-                <a href="#!" class="brand-logo center">bike easy</a>
+                <a class="brand-logo center">bike easy</a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">cloud</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li>bus and bike directions for denver/boulder</a></li>
+                    <li>denver/boulder</a></li>
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
                     <li>
@@ -60,26 +63,49 @@
                     </li>
 
                     <!-- WEATHER CONTAINER -->
+                      <!-- DENVER TABLE -->
                     <div class="container" id="weather">
                       <div class="row">
-                        <div class="col s12 m12 l12" id="denver-weather"><h6>
-                          Here
-                        </h6>
-                        </div>
-                        <div class="row">
-                        <div class="col s12 m12 l12" id="boulder-weather"><h6>
-                          There
-                        </h6>
-                        </div>
+                        <div class="col s12 m12 l12 weather-scroll">
+                          <table id="denver-weather" class="weather-container">
+                            <thead>
+                              <tr><h5>Denver Weather</h5></tr>
+                                <th><i class="fa fa-clock-o"></i></th>
+                                <th><i class="fa fa-thermometer-half"></i></th>
+                                <!-- <th>Wind</th> -->
+                                <th>Wind<i class="fa fa-compass"></i></th>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                          </table>
                         </div>
                       </div>
+
+
+                        <div class="row">
+                        <div class="col s12 m12 l12 weather-scroll">
+                          <table id="boulder-weather" class="weather-container">
+                            <thead>
+                              <tr><h5 id="boulder-weather-label">Boulder Weather</h5></tr>
+                                <th><i class="fa fa-clock-o"></i></th>
+                                <th><i class="fa fa-thermometer-half"></i></th>
+                                <!-- <th>Wind</th> -->
+                                <th>Wind<i class="fa fa-compass"></i></th>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                          </table>
+                        </div>
+                        </div>
+
                     </div>
                       <!-- END OF WEATHER CONTAINER -->
 
                 </ul>
             </div>
+        <!-- IF THIS START TO BREAK THIS NAV AND THE ONE ABOVE IT COULD MAYBE BE TO BLAME...THEY WERE HANGING OUT AS A <NAV></DIV> SET BEFORE I CHANGED IT TO </NAV> -->
 
-        </div>
+        </nav>
     </header>
 
     <main>
@@ -266,11 +292,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col l6 s12">
-                        <h5 class="white-text">bike easy</h5>
-                        <p class="grey-text text-lighten-4">bus + bike = win</p>
-                            <p class="grey-text">making bus and bike directions simple</p>
+                        <h3 class="white-text">bike easy</h3>
+                        <!-- <p class="grey-text text-lighten-4">bus + bike = win</p> -->
+
                     </div>
-                    <div class="col l4 offset-l2 s12 hide-on-med-and-down">
+                    <div class="col l4 offset-l2 s12">
+                        <p class="grey-text text-lighten-4 center">making bus and bike directions simple for the denver/boulder metro area</p>
                       <!-- <br>
                       <br> -->
 
@@ -286,7 +313,7 @@
             <div class="footer-copyright">
                 <div class="container">
                     © 2017 Megan Gross
-                    <a class="grey-text text-lighten-4 right" href="#!">Credit APIs here?</a>
+                    <p class="grey-text text-lighten-4 right">Powered by Google and Open Weather Map</p>
                 </div>
             </div>
         </footer>

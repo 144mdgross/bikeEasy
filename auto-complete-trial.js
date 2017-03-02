@@ -126,6 +126,11 @@ $(document).ready(function() {
 
         let warning = directionsRenderer3.directions.routes[0].warnings[0]
         let steps = directionsRenderer3.directions.routes[0].legs[0].steps
+        console.log(steps, "steps");
+
+        let stepDistance = directionsRenderer3.directions.routes[0].legs[0].steps.distance
+
+        let stepDuration = directionsRenderer3.directions.routes[0].legs[0].steps.duration
 
         let copyright = directionsRenderer3.directions.routes[0].copyrights
 
@@ -145,6 +150,7 @@ $(document).ready(function() {
         //  CREATE CONTROL FLOW SO EACH TABLE GOES TO APPROPRIATE SPOT
         //  REMEMBER TO DISPLAY WARNING
         let placeId = directionsRenderer3.directions.geocoded_waypoints[0].place_id
+        console.log(placeId, "placeId");
 
         if ($('#origin-input').val().includes('Boulder')) {
             if (placeId === "Ei0xNDAxLTE0NDMgQ2FueW9uIEJsdmQsIEJvdWxkZXIsIENPIDgwMzAyLCBVU0E") {
@@ -154,8 +160,8 @@ $(document).ready(function() {
                 let row2 = $('<tr>')
                 let timeSummary = $('<td>')
                 timeSummary.text(totalLegTime)
-                timeSummary.addClass('summary')
                 row2.append(timeSummary)
+                row2.addClass('summary')
 
                 let distanceSummary = $('<td>')
                 distanceSummary.text(totalLegDistance)
@@ -167,14 +173,27 @@ $(document).ready(function() {
                 for (var i = 1; i < steps.length; i++) {
                     let instruction = steps[i].instructions
                     let row = $('<tr>')
-                    row.html(instruction)
-                    row.addClass('')
+                    let colInstruction = $('<td>')
+                    colInstruction.html(instruction)
+                    row.append(colInstruction)
+                    let colTime = $('<td>')
+                    colTime.text(stepDuration)
+                    row.append(colTime)
+                    let colDistance = $('<td>')
+                    colTime.text(stepDistance)
+                    row.append(stepDistance)
                     $('#panelTwo tbody').append(row)
 
                     // append each instruction to the table
 
+                    //ChIJp5XYCMN4bIcRN1lYVWhNxcM placeId
+
+                    //ChIJ58F9ysN4bIcRm4CacOXarfI placeId
+                    // ChIJZTYRctV-bIcRb74MCUMHUzQ
+                    // ChIJ-3hMUcJ4bIcRuaidfDaWTnY  
+
                 }
-            } else if (placeId === "ChIJ58F9ysN4bIcRm4CacOXarfI") {
+            } else if (placeId === "ChIJ-3hMUcJ4bIcRuaidfDaWTnY" || placeId === "ChIJ58F9ysN4bIcRm4CacOXarfI" || placeId === 'ChIJZTYRctV-bIcRb74MCUMHUzQ' || placeId === 'ChIJp5XYCMN4bIcRN1lYVWhNxcM ' ||placeId === '') {
                 $('#panelThree .warning').text(warning)
                 $('#copyright3').text(copyright)
 
@@ -240,7 +259,7 @@ $(document).ready(function() {
 
                 let row2 = $('<tr>')
                 let timeSummary = $('<td>')
-                timeSummary.text(totalLegTime)
+                timeSummary.text(totalLegTime, "Leg")
                 timeSummary.addClass('summary')
                 row2.append(timeSummary)
 
@@ -350,8 +369,8 @@ $(document).ready(function() {
         directionsDisplay2 = new google.maps.DirectionsRenderer()
         map = new google.maps.Map(
             document.getElementById("map"), {
-                center: new google.maps.LatLng(40.0722083, -105.5083316),
-                zoom: 13,
+                center: new google.maps.LatLng(40.016779, -105.276376),
+                zoom: 11,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
         directionsDisplay.setMap(map);
@@ -370,7 +389,7 @@ $(document).ready(function() {
     $('#submit').click(function(e) {
         e.target = this
         if ($('#origin-input').val() === "" || $('#destination-input').val() === "") {
-            Materialize.toast('I am a toast!', 4000, 'toast-class')
+            Materialize.toast('directions?', 4000, 'toast-class')
         } else {
             $('#totals').removeClass('hide')
             $('#directions-tables').removeClass('hide')
@@ -402,17 +421,56 @@ $(document).ready(function() {
     }) // end of click
 
   // call ajax for Boulder (id "boulder-weather")
-    // $.ajax({
-    //   method: 'GET',
-    //   url: 'http://api.openweathermap.org/data/2.5/weather?lat=40.017512&lon=-105.28561100000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05',
-    //   dataType: 'json',
-    //   success: function(data){
-    //     console.log("success!", data);
-    //   },
-    //   error: function(){
-    //     console.log('error');
-    //   }
-    // })
+    $.ajax({
+      method: 'GET',
+      // url: 'http://api.openweathermap.org/data/2.5/weather?lat=40.017512&lon=-105.28561100000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05',
+      url: 'boulder-weather-data.js',
+      dataType: 'json',
+      success: function(data){
+        console.log("success!", data);
+
+    let list= data.list
+    let boulderTable = $('#boulder-weather tbody')
+
+
+    for (var i = hours; i < list.length; i += 3) {
+      let snow = list[i].snow
+      let temperature = Math.round(list[i].main.temp) + 'º'
+      console.log('boulder Temp', temperature);
+      let description = list[i].weather[0].description
+      let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360)/45))]
+
+        let windSpeed = Math.round(list[i].wind.speed) + "mph"
+
+        let row2 = $('<tr>')
+        let column4 = $('<td>')
+        let column1 = $('<td>')
+        let column2 = $('<td>')
+        let column3 = $('<td>')
+
+        if ( i < 24) {
+          column4.text(`${i}:00`)
+        } else {
+          let convertTime = i - 24
+          column4.text(`${convertTime}:00`)
+        }
+
+        column1.text(temperature)
+        column2.text(`${windSpeed} ${windDegree}` )
+        row2.append(column4)
+        row2.append(column1)
+        row2.append(column2)
+        boulderTable.append(row2)
+
+    }
+
+
+
+      },
+      error: function(){
+        console.log('error');
+      }
+    })
     //
     // call ajax for Denver (id "denver-weather")
     $.ajax({
@@ -424,22 +482,39 @@ $(document).ready(function() {
         console.log("success!", data.list);
 
         let list= data.list
+        let denverTable = $('#denver-weather tbody')
 
+        //  SO HERE...HOW COULD I MAKE THIS A FUNCTION WHEN IT NEEDS TO APPEND TO TWO DIFFERENT TABLE PARENTS?
         for (var i = hours; i < list.length; i += 3) {
-          let temperature = Math.round(list[i].main.temp) + 'º'
-          console.log(temperature, "temp")
           let snow = list[i].snow
-          console.log(snow, "snow")
+          let temperature = Math.round(list[i].main.temp) + 'º'
           let description = list[i].weather[0].description
-          console.log(description, "description")
-          let windSpeed = Math.round(list[i].wind.speed) + "mph"
-          console.log(windSpeed, "windSpeed")
+          let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360)/45))]
 
-          // now need a switch statement to match this to each of the possible 16 positions in Array?
-          let windDegree = Math.round(((list[i].wind.deg % 360)/22.5))
-          console.log(windDegree, "windDegree")
+            let windSpeed = Math.round(list[i].wind.speed) + "mph"
+
+            let row2 = $('<tr>')
+            let column4 = $('<td>')
+            let column1 = $('<td>')
+            let column2 = $('<td>')
+            let column3 = $('<td>')
+
+            if ( i < 24) {
+              column4.text(`${i}:00`)
+            } else {
+              let convertTime = i - 24
+              column4.text(`${convertTime}:00`)
+            }
+
+            column1.text(temperature)
+            column2.text(`${windSpeed} ${windDegree}` )
+            row2.append(column4)
+            row2.append(column1)
+            row2.append(column2)
+            denverTable.append(row2)
+
         }
-        // now make some functions to display the data and call it here.
+
 
 
       },
@@ -452,7 +527,7 @@ $(document).ready(function() {
 })
 
 // WIND DEGREE FUNCTION AND DATA
-let degreeArray = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
+let degreeArray = ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"]
 
 // need to divide degree % 360
 // divide and round degree by 22.5 to correspond to the 16 values in the array
