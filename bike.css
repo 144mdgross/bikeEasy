@@ -85,7 +85,7 @@ h1{
   background-color: rgba(48, 36, 51, .6);
 }*/
 .warning{
-
+  background-color: rgba(153, 0, 48, .6);
 }
 
 #weather {
@@ -145,6 +145,8 @@ tr:nth-child(even){
   }
   h1{
     font-size: 2em;
+    padding: .1em;
+    margin: .1em 0em;
   }
  main {
    font-size: 1.2em;

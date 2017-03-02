@@ -10,6 +10,12 @@ $(document).ready(function() {
     let destinationLongitude
     var address1
     var address2
+    let currentTime = new Date();
+    console.log(currentTime, "currentTime Date Object");
+    let time = currentTime.getTime();
+    console.log(time, "time");
+    let hours = currentTime.getHours();
+    console.log(hours, "hours");
     // select box initialize
     $('select').material_select()
     // initialize side-nav
@@ -111,14 +117,13 @@ $(document).ready(function() {
         var directionsRenderer3 = new google.maps.DirectionsRenderer({
             directions: result,
             routeIndex: 2,
-            suppressMarkes: true,
+            suppressMarkers: true,
             map: map,
             polylineOptions: {
                 strokeColor: "purple"
             }
         });
-        // console.log("routeindex3 = ", directionsRenderer3.getRouteIndex());
-        // console.log(directionsRenderer3.directions.routes[0].warnings[0], "directions Renderer warning");
+
         let warning = directionsRenderer3.directions.routes[0].warnings[0]
         let steps = directionsRenderer3.directions.routes[0].legs[0].steps
 
@@ -140,7 +145,6 @@ $(document).ready(function() {
         //  CREATE CONTROL FLOW SO EACH TABLE GOES TO APPROPRIATE SPOT
         //  REMEMBER TO DISPLAY WARNING
         let placeId = directionsRenderer3.directions.geocoded_waypoints[0].place_id
-        console.log(placeId, "placeID");
 
         if ($('#origin-input').val().includes('Boulder')) {
             if (placeId === "Ei0xNDAxLTE0NDMgQ2FueW9uIEJsdmQsIEJvdWxkZXIsIENPIDgwMzAyLCBVU0E") {
@@ -169,7 +173,6 @@ $(document).ready(function() {
 
                     // append each instruction to the table
 
-                    // console.log(instruction);
                 }
             } else if (placeId === "ChIJ58F9ysN4bIcRm4CacOXarfI") {
                 $('#panelThree .warning').text(warning)
@@ -197,7 +200,6 @@ $(document).ready(function() {
 
                     // append each instruction to the table
 
-                    // console.log(instruction);
                 }
 
             } else {
@@ -282,7 +284,6 @@ $(document).ready(function() {
 
                     // append each instruction to the table
 
-                    // console.log(instruction);
                 }
             } else {
                 $('#panelOne .warning').text(warning)
@@ -361,6 +362,8 @@ $(document).ready(function() {
 
     }
 
+      //   SET bounds
+
 
     initMap()
 
@@ -375,7 +378,6 @@ $(document).ready(function() {
             $('tbody').empty()
 
             if ($('#origin-input').val().includes('Boulder') && $('#destination-input').val().includes('Denver')) {
-                console.log($('#origin-input').val(), "text");
                 calculateAndDisplayRoute(new google.maps.LatLng(originLatitude, originLongitude), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
 
                 calculateAndDisplayBusRoute(new google.maps.LatLng(40.016779, -105.276376), new google.maps.LatLng(39.753931, -105.001159), directionsService, directionsDisplay, map)
@@ -412,20 +414,49 @@ $(document).ready(function() {
     //   }
     // })
     //
-    // // call ajax for Denver (id "denver-weather")
-    // $.ajax({
-    //   method: 'GET',
-    //   url: `http://api.openweathermap.org/data/2.5/forecast?lat=39.7366466&lon=-104.98454900000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05`,
-    //   dataType: 'json',
-    //   success: function(data){
-    //     console.log("success!", data);
-    //   },
-    //   error: function(){
-    //     console.log('error');
-    //   }
-    // })
+    // call ajax for Denver (id "denver-weather")
+    $.ajax({
+      method: 'GET',
+      // url: `http://api.openweathermap.org/data/2.5/forecast?lat=39.7366466&lon=-104.98454900000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05`,
+      url: 'denver-weather-data.js',
+      dataType: 'json',
+      success: function(data){
+        console.log("success!", data.list);
+
+        let list= data.list
+
+        for (var i = hours; i < list.length; i += 3) {
+          let temperature = Math.round(list[i].main.temp) + 'º'
+          console.log(temperature, "temp")
+          let snow = list[i].snow
+          console.log(snow, "snow")
+          let description = list[i].weather[0].description
+          console.log(description, "description")
+          let windSpeed = Math.round(list[i].wind.speed) + "mph"
+          console.log(windSpeed, "windSpeed")
+
+          // now need a switch statement to match this to each of the possible 16 positions in Array?
+          let windDegree = Math.round(((list[i].wind.deg % 360)/22.5))
+          console.log(windDegree, "windDegree")
+        }
+        // now make some functions to display the data and call it here.
+
+
+      },
+      error: function(){
+        console.log('error');
+      }
+    })
 
 
 })
+
+// WIND DEGREE FUNCTION AND DATA
+let degreeArray = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
+
+// need to divide degree % 360
+// divide and round degree by 22.5 to correspond to the 16 values in the array
+// ((windDegree % 360)/ 22.5) will give array index corresponding to
+
 // Get the ball rolling and trigger our init() on 'load'
 //  google.maps.event.addDomListener(window, 'load', init);
