@@ -111,13 +111,6 @@ $(document).ready(function() {
 
     };
 
-
-    // make an event listener so that when the button is clicked it will fun functions to re-render routes
-
-
-    // manage location in render array
-
-
     function renderDirections(result, map) {
 
         var directionsRenderer3 = new google.maps.DirectionsRenderer({
@@ -132,13 +125,10 @@ $(document).ready(function() {
 
         let warning = directionsRenderer3.directions.routes[0].warnings[0]
         let steps = directionsRenderer3.directions.routes[0].legs[0].steps
-        // console.log(steps, "steps");
 
         let stepDistance = directionsRenderer3.directions.routes[0].legs[0].steps.distance
-        // console.log(stepDistance, stepDistance);
 
         let stepDuration = directionsRenderer3.directions.routes[0].legs[0].steps.duration
-        // console.log(stepDuration, stepDuration);
 
         let copyright = directionsRenderer3.directions.routes[0].copyrights
 
@@ -146,286 +136,88 @@ $(document).ready(function() {
 
         let totalLegDistance = directionsRenderer3.directions.routes[0].legs[0].distance.text
 
-        //  ward place-id:[0] "EiY3My03NSBDb2x1bWJpYSBTdCwgV2FyZCwgQ08gODA0ODEsIFVTQQ"
+        function buildDirections(panel, copyrightInfo) {
+            $(`${panel} .warning`).html(warning)
+            $(`${copyrightInfo}`).html(copyright)
+            //  add leg time to total time
 
-        // Boulder Transit Center place-id:
-        // "Ei0xNDAxLTE0NDMgQ2FueW9uIEJsdmQsIEJvdWxkZXIsIENPIDgwMzAyLCBVU0E"
-        // "Ei0xNDAxLTE0NDMgQ2FueW9uIEJsdmQsIEJvdWxkZXIsIENPIDgwMzAyLCBVU0E"
+            let row2 = $('<tr>')
+            let timeSummary = $('<td>')
+            timeSummary.text(totalLegTime)
+            row2.append(timeSummary)
+            row2.addClass('summary')
 
-        // Union Station place id
-        // "ChIJ58F9ysN4bIcRm4CacOXarfI
-        // "ChIJ58F9ysN4bIcRm4CacOXarfI"
-        //  CREATE CONTROL FLOW SO EACH TABLE GOES TO APPROPRIATE SPOT
-        //  REMEMBER TO DISPLAY WARNING
+
+            let distanceSummary = $('<td>')
+            distanceSummary.text(totalLegDistance)
+            distanceSummary.addClass('distance')
+            row2.append(distanceSummary)
+            $(`${panel} tbody`).append(row2)
+
+            //  loop through steps
+            for (var i = 1; i < steps.length; i++) {
+                let instruction = steps[i].instructions
+
+                let stepTime = steps[i].duration.text
+
+                let instructionDistance = steps[i].distance.text
+
+                let row = $('<tr>')
+                let colInstruction = $('<td>')
+                colInstruction.html(instruction)
+                row.append(colInstruction)
+
+                let colDistance = $('<td>')
+                colDistance.text(instructionDistance)
+                row.append(colDistance)
+                $(`${panel} tbody`).append(row)
+            }
+        }
+
         let placeId = directionsRenderer3.directions.geocoded_waypoints[0].place_id
-        // console.log(placeId, "placeId");
+
 
 
         if ($('#origin-input').val().includes('Boulder')) {
             if (placeId === "Ei0xNDAxLTE0NDMgQ2FueW9uIEJsdmQsIEJvdWxkZXIsIENPIDgwMzAyLCBVU0E") {
-                $('#panelTwo .warning').html(warning)
-                $('#copyright2').html(copyright)
-                //  add leg time to total time
+
+                buildDirections('#panelTwo', '#copyright2')
+
                 allTheTime += parseInt(totalLegTime.match(/\d+/g));
                 console.log('all the time step one?', allTheTime);
 
-                let row2 = $('<tr>')
-                let timeSummary = $('<td>')
-                timeSummary.text(totalLegTime)
-                row2.append(timeSummary)
-                row2.addClass('summary')
-
-
-                let distanceSummary = $('<td>')
-                distanceSummary.text(totalLegDistance)
-                distanceSummary.addClass('distance')
-                row2.append(distanceSummary)
-                $('#panelTwo tbody').append(row2)
-
-                //  loop through steps
-                for (var i = 1; i < steps.length; i++) {
-                    let instruction = steps[i].instructions
-
-                    let stepTime = steps[i].duration.text
-
-                    // this is writing over global varaiable
-                    let stepDistance = steps[i].distance.text
-
-                    let row = $('<tr>')
-                    let colInstruction = $('<td>')
-                    colInstruction.html(instruction)
-                    row.append(colInstruction)
-
-
-                    let colDistance = $('<td>')
-                    colDistance.text(stepDistance)
-                    row.append(colDistance)
-                    $('#panelTwo tbody').append(row)
-
-                    // append each instruction to the table
-
-                    //ChIJp5XYCMN4bIcRN1lYVWhNxcM placeId
-
-                    //ChIJ58F9ysN4bIcRm4CacOXarfI placeId
-                    // ChIJZTYRctV-bIcRb74MCUMHUzQ
-                    // ChIJ-3hMUcJ4bIcRuaidfDaWTnY
-
-                }
             } else if (placeId === "ChIJ58F9ysN4bIcRm4CacOXarfI") {
-
-                $('#panelThree .warning').text(warning)
-                $('#copyright3').text(copyright)
-
+                //  make this a different function
                 allTheTime += parseInt(totalLegTime.match(/\d+/g));
                 console.log('all the time step two?', allTheTime);
 
-                let row3 = $('<tr>')
-                let timeSummary = $('<td>')
-                timeSummary.text(totalLegTime)
-                timeSummary.addClass('summary')
-                row3.append(timeSummary)
-
-                let distanceSummary = $('<td>')
-                distanceSummary.text(totalLegDistance)
-                distanceSummary.addClass('distance')
-                row3.append(distanceSummary)
-                $('#panelThree tbody').append(row3)
-
-
-                for (var i = 0; i < steps.length; i++) {
-                    let instruction = steps[i].instructions
-
-                    let stepTime = steps[i].duration.text
-
-                    // this is writing over global varaiable
-                    let stepDistance = steps[i].distance.text
-
-                    let row = $('<tr>')
-                    let colInstruction = $('<td>')
-                    colInstruction.html(instruction)
-                    row.append(colInstruction)
-
-
-                    let colDistance = $('<td>')
-                    colDistance.text(stepDistance)
-                    row.append(colDistance)
-                    $('#panelThree tbody').append(row)
-                    // append each instruction to the table
-
-                }
+                buildDirections('#panelThree', '#copyright3')
 
             } else {
-                // console.log(placeId, "place going through else");
-                $('#panelOne .warning').text(warning)
-                $('#copyright1').text(copyright)
+
+                buildDirections('#panelOne', '#copyright1')
 
                 allTheTime += parseInt(totalLegTime.match(/\d+/g));
                 console.log(allTheTime, "alltheTime should be totaled?");
 
                 // console.log(parseFloat(totalLegDistance.match(/\d/g)), "parsing distance working?")
 
-                let row1 = $('<tr>')
-                let timeSummary = $('<td>')
-                row1.append(timeSummary)
-                timeSummary.text(totalLegTime)
-                timeSummary.addClass('summary')
-
-                let distanceSummary = $('<td>')
-                distanceSummary.text(totalLegDistance)
-                distanceSummary.addClass('distance')
-                row1.append(distanceSummary)
-                $('#panelOne tbody').append(row1)
-
-
-                for (var i = 0; i < steps.length; i++) {
-                    let instruction = steps[i].instructions
-
-                    let stepTime = steps[i].duration.text
-
-                    // this is writing over global varaiable
-                    let stepDistance = steps[i].distance.text
-
-                    let row = $('<tr>')
-                    let colInstruction = $('<td>')
-                    colInstruction.html(instruction)
-                    row.append(colInstruction)
-
-
-                    let colDistance = $('<td>')
-                    colDistance.text(stepDistance)
-                    row.append(colDistance)
-                    $('#panelOne tbody').append(row)
-                    // append each instruction to the table
-
-                }
             }
 
         } else if ($('#origin-input').val().includes('Denver')) {
             if (placeId === "ChIJ58F9ysN4bIcRm4CacOXarfI") {
-                // log(placeId, "is anything getting through?")
-                // ChIJZTYRctV-bIcRb74MCUMHUzQ
-                // ChIJ-3hMUcJ4bIcRuaidfDaWTnY
-                $('#panelTwo .warning').html(warning)
-                $('#copyright2').html(copyright)
 
+                buildDirections('#panelTwo', '#copyright2')
 
-                let row2 = $('<tr>')
-                let timeSummary = $('<td>')
-                timeSummary.text(totalLegTime, "Leg")
-                timeSummary.addClass('summary')
-                row2.append(timeSummary)
-
-                let distanceSummary = $('<td>')
-                distanceSummary.text(totalLegDistance)
-                distanceSummary.addClass('distance')
-                row2.append(distanceSummary)
-                $('#panelTwo tbody').append(row2)
-
-
-                //  loop through steps
-                for (var i = 1; i < steps.length; i++) {
-                    let instruction = steps[i].instructions
-
-                    let stepTime = steps[i].duration.text
-
-                    // this is writing over global varaiable
-                    let stepDistance = steps[i].distance.text
-
-                    let row = $('<tr>')
-                    let colInstruction = $('<td>')
-                    colInstruction.html(instruction)
-                    row.append(colInstruction)
-
-
-                    let colDistance = $('<td>')
-                    colDistance.text(stepDistance)
-                    row.append(colDistance)
-                    $('#panelTwo tbody').append(row)
-                    // append each instruction to the table
-
-                }
             } else if (placeId === "Ei0xNDAxLTE0NDMgQ2FueW9uIEJsdmQsIEJvdWxkZXIsIENPIDgwMzAyLCBVU0E") {
-                $('#panelThree .warning').text(warning)
-                $('#copyright3').text(copyright)
 
-                let row3 = $('<td>')
-                let timeSummary = $('<td>')
-                timeSummary.text(totalLegTime)
-                timeSummary.addClass('summary')
-                row3.append(timeSummary)
+                buildDirections('#panelThree', '#copyright3')
 
-                let distanceSummary = $('<td>')
-                distanceSummary.text(totalLegDistance)
-                distanceSummary.addClass('distance')
-                row3.append(distanceSummary)
-                $('#panelThree tbody').append(row3)
-
-                for (var i = 0; i < steps.length; i++) {
-                    let instruction = steps[i].instructions
-
-                    let stepTime = steps[i].duration.text
-
-                    // this is writing over global varaiable
-                    let stepDistance = steps[i].distance.text
-
-                    let row = $('<tr>')
-                    let colInstruction = $('<td>')
-                    colInstruction.html(instruction)
-                    row.append(colInstruction)
-
-
-                    let colDistance = $('<td>')
-                    colDistance.text(stepDistance)
-                    row.append(colDistance)
-                    $('#panelThree tbody').append(row)
-                    // append each instruction to the table
-
-
-                    // append each instruction to the table
-
-                }
             } else {
-                $('#panelOne .warning').text(warning)
-                $('#copyright1').text(copyright)
-
-                let row1 = $('<tr>')
-                let timeSummary = $('<td>')
-                row1.append(timeSummary)
-                timeSummary.text(totalLegTime)
-                timeSummary.addClass('summary')
-
-                let distanceSummary = $('<td>')
-                distanceSummary.text(totalLegDistance)
-                distanceSummary.addClass('distance')
-                row1.append(distanceSummary)
-                $('#panelOne tbody').append(row1)
-
-                for (var i = 0; i < steps.length; i++) {
-                    let instruction = steps[i].instructions
-
-                    let stepTime = steps[i].duration.text
-
-                    // this is writing over global varaiable
-                    let stepDistance = steps[i].distance.text
-
-                    let row = $('<tr>')
-                    let colInstruction = $('<td>')
-                    colInstruction.html(instruction)
-                    row.append(colInstruction)
-
-
-                    let colDistance = $('<td>')
-                    colDistance.text(stepDistance)
-                    row.append(colDistance)
-                    $('#panelOne tbody').append(row)
-                    // append each instruction to the table
-
-
-                }
+                buildDirections('#panelOne', '#copyright1')
             }
-        } // end of else if
-
-    } // end of render directions function
+        }
+    }
 
     function calculateAndDisplayRoute(origin, destination, directionService, directionDisplay, map) {
         directionService.route({
@@ -481,7 +273,7 @@ $(document).ready(function() {
 
     initMap()
 
-//  work with local storage here?
+    //  work with local storage here?
 
 
 
@@ -494,14 +286,16 @@ $(document).ready(function() {
 
 
             // KEEPING TOTALS HIDDEN FOR THURSDAY
-            $('#totals').removeClass('hide')
+            // $('#totals').removeClass('hide')
             $('#directions-tables').removeClass('hide')
-
-
-
-            $('tbody').empty()
-
             $('#totalTime').text(`${allTheTime} min`)
+
+
+            $('#panelOne tbody').empty()
+            $('#panelTwo tbody').empty()
+            $('#panelThree tbody').empty()
+
+
 
 
             if ($('#origin-input').val().includes('Boulder') && $('#destination-input').val().includes('Denver')) {
@@ -530,174 +324,173 @@ $(document).ready(function() {
 
     // only do ajax call if local storage isn't set.
     if (localStorage.getItem(`boulder-${year}-${date}-${month}`) === null) {
-    $.ajax({
-        method: 'GET',
-        url: 'http://api.openweathermap.org/data/2.5/forecast?lat=40.017512&lon=-105.28561100000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05',
-        // url: 'boulder-weather-data.js',
-        dataType: 'json',
-        success: function(data) {
-            // console.log("success!", data);
+        $.ajax({
+            method: 'GET',
+            url: 'http://api.openweathermap.org/data/2.5/forecast?lat=40.017512&lon=-105.28561100000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05',
+            // url: 'boulder-weather-data.js',
+            dataType: 'json',
+            success: function(data) {
+                // console.log("success!", data);
 
-            localStorage.setItem(`boulder-${year}-${date}-${month}`, JSON.stringify(data))
+                localStorage.setItem(`boulder-${year}-${date}-${month}`, JSON.stringify(data))
 
-            var aValue = JSON.parse(localStorage.getItem(`boulder-${year}-${date}-${month}`));
+                var aValue = JSON.parse(localStorage.getItem(`boulder-${year}-${date}-${month}`));
 
-            renderBoulderWeather(aValue)
-            // console.log('meh', aValue);
+                renderBoulderWeather(aValue)
+                // console.log('meh', aValue);
 
-            //  okay, so now that local storage is being set...
-            //  now I need to move these tables outside the ajax call because otherwise they will only work once...
+                //  okay, so now that local storage is being set...
+                //  now I need to move these tables outside the ajax call because otherwise they will only work once...
 
-            // let list = data.list
-            // // console.log(list, "list");
-            // let boulderTable = $('#boulder-weather tbody')
-            //
-            //
-            // for (var i = hours; i < list.length; i += 3) {
-            //     let snow = list[i].snow
-            //     let temperature = Math.round(list[i].main.temp) + 'º'
-            //     // console.log('boulder Temp', temperature);
-            //     let description = list[i].weather[0].description
-            //     let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
-            //
-            //     let windSpeed = Math.round(list[i].wind.speed) + "mph"
-            //
-            //     let row2 = $('<tr>')
-            //     let column4 = $('<td>')
-            //     let column1 = $('<td>')
-            //     let column2 = $('<td>')
-            //     let column3 = $('<td>')
-            //
-            //     if (i < 24) {
-            //         column4.text(`${i}:00`)
-            //     } else {
-            //         let convertTime = i - 24
-            //         column4.text(`${convertTime}:00`)
-            //     }
-            //
-            //     column1.text(temperature)
-            //     column2.text(`${windSpeed} ${windDegree}`)
-            //     row2.append(column4)
-            //     row2.append(column1)
-            //     row2.append(column2)
-            //     boulderTable.append(row2)
-            //
-            // }
-            //
-            //
+                // let list = data.list
+                // // console.log(list, "list");
+                // let boulderTable = $('#boulder-weather tbody')
+                //
+                //
+                // for (var i = hours; i < list.length; i += 3) {
+                //     let snow = list[i].snow
+                //     let temperature = Math.round(list[i].main.temp) + 'º'
+                //     // console.log('boulder Temp', temperature);
+                //     let description = list[i].weather[0].description
+                //     let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
+                //
+                //     let windSpeed = Math.round(list[i].wind.speed) + "mph"
+                //
+                //     let row2 = $('<tr>')
+                //     let column4 = $('<td>')
+                //     let column1 = $('<td>')
+                //     let column2 = $('<td>')
+                //     let column3 = $('<td>')
+                //
+                //     if (i < 24) {
+                //         column4.text(`${i}:00`)
+                //     } else {
+                //         let convertTime = i - 24
+                //         column4.text(`${convertTime}:00`)
+                //     }
+                //
+                //     column1.text(temperature)
+                //     column2.text(`${windSpeed} ${windDegree}`)
+                //     row2.append(column4)
+                //     row2.append(column1)
+                //     row2.append(column2)
+                //     boulderTable.append(row2)
+                //
+                // }
+                //
+                //
 
-        },
-        error: function() {
-            // console.log('error');
-        }
-    })
-    }// end of ajax if for boulder
-      else {
+            },
+            error: function() {
+                // console.log('error');
+            }
+        })
+    } // end of ajax if for boulder
+    else {
         let boulderData = JSON.parse(localStorage.getItem(`boulder-${year}-${date}-${month}`))
 
         renderBoulderWeather(boulderData)
-      }
+    }
     //
     // call ajax for Denver (id "denver-weather")
-      if (localStorage.getItem(`denver-${year}-${date}-${month}`) === null) {
-    $.ajax({
-        method: 'GET',
-        url: `http://api.openweathermap.org/data/2.5/forecast?lat=39.7366466&lon=-104.98454900000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05`,
-        // url: 'denver-weather-data.js',
-        dataType: 'json',
-        success: function(data) {
-            // console.log("success!", data.list);
+    if (localStorage.getItem(`denver-${year}-${date}-${month}`) === null) {
+        $.ajax({
+            method: 'GET',
+            url: `http://api.openweathermap.org/data/2.5/forecast?lat=39.7366466&lon=-104.98454900000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05`,
+            // url: 'denver-weather-data.js',
+            dataType: 'json',
+            success: function(data) {
+                // console.log("success!", data.list);
 
-            localStorage.setItem(`denver-${year}-${date}-${month}`, JSON.stringify(data))
+                localStorage.setItem(`denver-${year}-${date}-${month}`, JSON.stringify(data))
 
-            var bValue = JSON.parse(localStorage.getItem(`denver-${year}-${date}-${month}`))
+                var bValue = JSON.parse(localStorage.getItem(`denver-${year}-${date}-${month}`))
 
-            renderDenverWeather(bValue)
+                renderDenverWeather(bValue)
 
 
 
-        },
-        error: function() {
-            // console.log('error');
-        }
-    })
-    }
-      else {
-      let denverData = JSON.parse(localStorage.getItem(`denver-${year}-${date}-${month}`))
+            },
+            error: function() {
+                // console.log('error');
+            }
+        })
+    } else {
+        let denverData = JSON.parse(localStorage.getItem(`denver-${year}-${date}-${month}`))
 
-      renderDenverWeather(denverData)
+        renderDenverWeather(denverData)
     }
     // refactor to not have hoisting?
-    function renderDenverWeather (localData) {
-      let list = localData.list
-      let denverTable = $('#denver-weather tbody')
+    function renderDenverWeather(localData) {
+        let list = localData.list
+        let denverTable = $('#denver-weather tbody')
 
-      for (var i = hours; i < list.length; i += 3) {
-          let snow = list[i].snow
-          let temperature = Math.round(list[i].main.temp) + 'º'
-          let description = list[i].weather[0].description
-          let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
+        for (var i = hours; i < list.length; i += 3) {
+            let snow = list[i].snow
+            let temperature = Math.round(list[i].main.temp) + 'º'
+            let description = list[i].weather[0].description
+            let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
 
-          let windSpeed = Math.round(list[i].wind.speed) + "mph"
+            let windSpeed = Math.round(list[i].wind.speed) + "mph"
 
-          let row2 = $('<tr>')
-          let column4 = $('<td>')
-          let column1 = $('<td>')
-          let column2 = $('<td>')
-          let column3 = $('<td>')
+            let row2 = $('<tr>')
+            let column4 = $('<td>')
+            let column1 = $('<td>')
+            let column2 = $('<td>')
+            let column3 = $('<td>')
 
-          if (i < 24) {
-              column4.text(`${i}:00`)
-          } else {
-              let convertTime = i - 24
-              column4.text(`${convertTime}:00`)
-          }
+            if (i < 24) {
+                column4.text(`${i}:00`)
+            } else {
+                let convertTime = i - 24
+                column4.text(`${convertTime}:00`)
+            }
 
-          column1.text(temperature)
-          column2.text(`${windSpeed} ${windDegree}`)
-          row2.append(column4)
-          row2.append(column1)
-          row2.append(column2)
-          denverTable.append(row2)
+            column1.text(temperature)
+            column2.text(`${windSpeed} ${windDegree}`)
+            row2.append(column4)
+            row2.append(column1)
+            row2.append(column2)
+            denverTable.append(row2)
 
-      }
+        }
 
     }
 
-    function renderBoulderWeather (localData) {
-      let list = localData.list
-      let boulderTable = $('#boulder-weather tbody')
+    function renderBoulderWeather(localData) {
+        let list = localData.list
+        let boulderTable = $('#boulder-weather tbody')
 
-      for (let i = hours; i < list.length; i += 3) {
-          let snow = list[i].snow
-          let temperature = Math.round(list[i].main.temp) + 'º'
-          // console.log('boulder Temp', temperature);
-          let description = list[i].weather[0].description
-          let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
+        for (let i = hours; i < list.length; i += 3) {
+            let snow = list[i].snow
+            let temperature = Math.round(list[i].main.temp) + 'º'
+            // console.log('boulder Temp', temperature);
+            let description = list[i].weather[0].description
+            let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
 
-          let windSpeed = Math.round(list[i].wind.speed) + "mph"
+            let windSpeed = Math.round(list[i].wind.speed) + "mph"
 
-          let row2 = $('<tr>')
-          let column4 = $('<td>')
-          let column1 = $('<td>')
-          let column2 = $('<td>')
-          let column3 = $('<td>')
+            let row2 = $('<tr>')
+            let column4 = $('<td>')
+            let column1 = $('<td>')
+            let column2 = $('<td>')
+            let column3 = $('<td>')
 
-          if (i < 24) {
-              column4.text(`${i}:00`)
-          } else {
-              let convertTime = i - 24
-              column4.text(`${convertTime}:00`)
-          }
+            if (i < 24) {
+                column4.text(`${i}:00`)
+            } else {
+                let convertTime = i - 24
+                column4.text(`${convertTime}:00`)
+            }
 
-          column1.text(temperature)
-          column2.text(`${windSpeed} ${windDegree}`)
-          row2.append(column4)
-          row2.append(column1)
-          row2.append(column2)
-          boulderTable.append(row2)
+            column1.text(temperature)
+            column2.text(`${windSpeed} ${windDegree}`)
+            row2.append(column4)
+            row2.append(column1)
+            row2.append(column2)
+            boulderTable.append(row2)
 
-      }
+        }
 
 
 
