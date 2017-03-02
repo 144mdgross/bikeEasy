@@ -149,6 +149,11 @@ tr:nth-child(even){
   background-position: center;*/
 }
 
+.foot-container{
+  /*padding: 1em;*/
+  margin-top: 5em;
+}
+
 .weather-scroll{
   height: 20em;
   overflow: scroll;
@@ -160,6 +165,7 @@ tr:nth-child(even){
 
 #boulder-weather-label {
   background-color: rgba(115, 36, 61, .3);
+  padding: 1em;
 }
 /*#weatherTwo{
   background-color: rgba(115, 36, 61, .3);

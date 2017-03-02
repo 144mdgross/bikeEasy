@@ -11,11 +11,13 @@ $(document).ready(function() {
     var address1
     var address2
     let currentTime = new Date();
-    console.log(currentTime, "currentTime");
+    // console.log(currentTime, "currentTime");
     let time = currentTime.getTime();
     let hours = currentTime.getHours();
     let date = currentTime.getDate()
-    console.log(date, "date");
+    let year = currentTime.getFullYear()
+    let month = currentTime.getMonth()
+    // console.log(date, "date");
 
     let allTheTime = 0
     let allTheBikeMiles = 0
@@ -130,13 +132,13 @@ $(document).ready(function() {
 
         let warning = directionsRenderer3.directions.routes[0].warnings[0]
         let steps = directionsRenderer3.directions.routes[0].legs[0].steps
-        console.log(steps, "steps");
+        // console.log(steps, "steps");
 
         let stepDistance = directionsRenderer3.directions.routes[0].legs[0].steps.distance
-        console.log(stepDistance, stepDistance);
+        // console.log(stepDistance, stepDistance);
 
         let stepDuration = directionsRenderer3.directions.routes[0].legs[0].steps.duration
-        console.log(stepDuration, stepDuration);
+        // console.log(stepDuration, stepDuration);
 
         let copyright = directionsRenderer3.directions.routes[0].copyrights
 
@@ -260,7 +262,7 @@ $(document).ready(function() {
                 allTheTime += parseInt(totalLegTime.match(/\d+/g));
                 console.log(allTheTime, "alltheTime should be totaled?");
 
-                console.log(parseFloat(totalLegDistance.match(/\d/g)), "parsing distance working?")
+                // console.log(parseFloat(totalLegDistance.match(/\d/g)), "parsing distance working?")
 
                 let row1 = $('<tr>')
                 let timeSummary = $('<td>')
@@ -479,17 +481,28 @@ $(document).ready(function() {
 
     initMap()
 
+//  work with local storage here?
+
+
+
+
     $('#submit').click(function(e) {
         e.target = this
         if ($('#origin-input').val() === "" || $('#destination-input').val() === "") {
             Materialize.toast('directions?', 4000, 'toast-class')
         } else {
 
+
             // KEEPING TOTALS HIDDEN FOR THURSDAY
-            // $('#totals').removeClass('hide')
+            $('#totals').removeClass('hide')
             $('#directions-tables').removeClass('hide')
 
+
+
             $('tbody').empty()
+
+            $('#totalTime').text(`${allTheTime} min`)
+
 
             if ($('#origin-input').val().includes('Boulder') && $('#destination-input').val().includes('Denver')) {
                 calculateAndDisplayRoute(new google.maps.LatLng(originLatitude, originLongitude), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
@@ -515,120 +528,188 @@ $(document).ready(function() {
         }
     }) // end of click
 
-    // call ajax for Boulder (id "boulder-weather")
+    // only do ajax call if local storage isn't set.
+    if (localStorage.getItem(`boulder-${year}-${date}-${month}`) === null) {
     $.ajax({
         method: 'GET',
-        // url: 'http://api.openweathermap.org/data/2.5/forecast?lat=40.017512&lon=-105.28561100000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05',
-        url: 'boulder-weather-data.js',
+        url: 'http://api.openweathermap.org/data/2.5/forecast?lat=40.017512&lon=-105.28561100000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05',
+        // url: 'boulder-weather-data.js',
         dataType: 'json',
         success: function(data) {
-            console.log("success!", data);
+            // console.log("success!", data);
 
-            localStorage.setItem(`boulder-2017-${date}-03`, JSON.stringify(data))
+            localStorage.setItem(`boulder-${year}-${date}-${month}`, JSON.stringify(data))
 
-            var aValue = JSON.parse(localStorage.getItem(`boulder-2017-${date}-03`));
-            console.log('meh', aValue);
+            var aValue = JSON.parse(localStorage.getItem(`boulder-${year}-${date}-${month}`));
+
+            renderBoulderWeather(aValue)
+            // console.log('meh', aValue);
 
             //  okay, so now that local storage is being set...
             //  now I need to move these tables outside the ajax call because otherwise they will only work once...
 
-            let list = data.list
-            console.log(list, "list");
-            let boulderTable = $('#boulder-weather tbody')
-
-
-            for (var i = hours; i < list.length; i += 3) {
-                let snow = list[i].snow
-                let temperature = Math.round(list[i].main.temp) + 'º'
-                // console.log('boulder Temp', temperature);
-                let description = list[i].weather[0].description
-                let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
-
-                let windSpeed = Math.round(list[i].wind.speed) + "mph"
-
-                let row2 = $('<tr>')
-                let column4 = $('<td>')
-                let column1 = $('<td>')
-                let column2 = $('<td>')
-                let column3 = $('<td>')
-
-                if (i < 24) {
-                    column4.text(`${i}:00`)
-                } else {
-                    let convertTime = i - 24
-                    column4.text(`${convertTime}:00`)
-                }
-
-                column1.text(temperature)
-                column2.text(`${windSpeed} ${windDegree}`)
-                row2.append(column4)
-                row2.append(column1)
-                row2.append(column2)
-                boulderTable.append(row2)
-
-            }
-
-
+            // let list = data.list
+            // // console.log(list, "list");
+            // let boulderTable = $('#boulder-weather tbody')
+            //
+            //
+            // for (var i = hours; i < list.length; i += 3) {
+            //     let snow = list[i].snow
+            //     let temperature = Math.round(list[i].main.temp) + 'º'
+            //     // console.log('boulder Temp', temperature);
+            //     let description = list[i].weather[0].description
+            //     let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
+            //
+            //     let windSpeed = Math.round(list[i].wind.speed) + "mph"
+            //
+            //     let row2 = $('<tr>')
+            //     let column4 = $('<td>')
+            //     let column1 = $('<td>')
+            //     let column2 = $('<td>')
+            //     let column3 = $('<td>')
+            //
+            //     if (i < 24) {
+            //         column4.text(`${i}:00`)
+            //     } else {
+            //         let convertTime = i - 24
+            //         column4.text(`${convertTime}:00`)
+            //     }
+            //
+            //     column1.text(temperature)
+            //     column2.text(`${windSpeed} ${windDegree}`)
+            //     row2.append(column4)
+            //     row2.append(column1)
+            //     row2.append(column2)
+            //     boulderTable.append(row2)
+            //
+            // }
+            //
+            //
 
         },
         error: function() {
-            console.log('error');
+            // console.log('error');
         }
     })
+    }// end of ajax if for boulder
+      else {
+        let boulderData = JSON.parse(localStorage.getItem(`boulder-${year}-${date}-${month}`))
+
+        renderBoulderWeather(boulderData)
+      }
     //
     // call ajax for Denver (id "denver-weather")
+      if (localStorage.getItem(`denver-${year}-${date}-${month}`) === null) {
     $.ajax({
         method: 'GET',
-        // url: `http://api.openweathermap.org/data/2.5/forecast?lat=39.7366466&lon=-104.98454900000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05`,
-        url: 'denver-weather-data.js',
+        url: `http://api.openweathermap.org/data/2.5/forecast?lat=39.7366466&lon=-104.98454900000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05`,
+        // url: 'denver-weather-data.js',
         dataType: 'json',
         success: function(data) {
             // console.log("success!", data.list);
 
-            let list = data.list
-            let denverTable = $('#denver-weather tbody')
+            localStorage.setItem(`denver-${year}-${date}-${month}`, JSON.stringify(data))
 
-            //  SO HERE...HOW COULD I MAKE THIS A FUNCTION WHEN IT NEEDS TO APPEND TO TWO DIFFERENT TABLE PARENTS?
-            for (var i = hours; i < list.length; i += 3) {
-                let snow = list[i].snow
-                let temperature = Math.round(list[i].main.temp) + 'º'
-                let description = list[i].weather[0].description
-                let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
+            var bValue = JSON.parse(localStorage.getItem(`denver-${year}-${date}-${month}`))
 
-                let windSpeed = Math.round(list[i].wind.speed) + "mph"
-
-                let row2 = $('<tr>')
-                let column4 = $('<td>')
-                let column1 = $('<td>')
-                let column2 = $('<td>')
-                let column3 = $('<td>')
-
-                if (i < 24) {
-                    column4.text(`${i}:00`)
-                } else {
-                    let convertTime = i - 24
-                    column4.text(`${convertTime}:00`)
-                }
-
-                column1.text(temperature)
-                column2.text(`${windSpeed} ${windDegree}`)
-                row2.append(column4)
-                row2.append(column1)
-                row2.append(column2)
-                denverTable.append(row2)
-
-            }
+            renderDenverWeather(bValue)
 
 
 
         },
         error: function() {
-            console.log('error');
+            // console.log('error');
         }
     })
+    }
+      else {
+      let denverData = JSON.parse(localStorage.getItem(`denver-${year}-${date}-${month}`))
 
+      renderDenverWeather(denverData)
+    }
+    // refactor to not have hoisting?
+    function renderDenverWeather (localData) {
+      let list = localData.list
+      let denverTable = $('#denver-weather tbody')
+
+      for (var i = hours; i < list.length; i += 3) {
+          let snow = list[i].snow
+          let temperature = Math.round(list[i].main.temp) + 'º'
+          let description = list[i].weather[0].description
+          let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
+
+          let windSpeed = Math.round(list[i].wind.speed) + "mph"
+
+          let row2 = $('<tr>')
+          let column4 = $('<td>')
+          let column1 = $('<td>')
+          let column2 = $('<td>')
+          let column3 = $('<td>')
+
+          if (i < 24) {
+              column4.text(`${i}:00`)
+          } else {
+              let convertTime = i - 24
+              column4.text(`${convertTime}:00`)
+          }
+
+          column1.text(temperature)
+          column2.text(`${windSpeed} ${windDegree}`)
+          row2.append(column4)
+          row2.append(column1)
+          row2.append(column2)
+          denverTable.append(row2)
+
+      }
+
+    }
+
+    function renderBoulderWeather (localData) {
+      let list = localData.list
+      let boulderTable = $('#boulder-weather tbody')
+
+      for (let i = hours; i < list.length; i += 3) {
+          let snow = list[i].snow
+          let temperature = Math.round(list[i].main.temp) + 'º'
+          // console.log('boulder Temp', temperature);
+          let description = list[i].weather[0].description
+          let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
+
+          let windSpeed = Math.round(list[i].wind.speed) + "mph"
+
+          let row2 = $('<tr>')
+          let column4 = $('<td>')
+          let column1 = $('<td>')
+          let column2 = $('<td>')
+          let column3 = $('<td>')
+
+          if (i < 24) {
+              column4.text(`${i}:00`)
+          } else {
+              let convertTime = i - 24
+              column4.text(`${convertTime}:00`)
+          }
+
+          column1.text(temperature)
+          column2.text(`${windSpeed} ${windDegree}`)
+          row2.append(column4)
+          row2.append(column1)
+          row2.append(column2)
+          boulderTable.append(row2)
+
+      }
+
+
+
+
+    } // end of boulder Weather function
+
+    console.log(allTheTime, "All The Time totaled after route input?? pleeease?");
 
 })
+
+
+
 
 
 // WIND DEGREE FUNCTION AND DATA
