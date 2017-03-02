@@ -86,7 +86,8 @@ h1{
   background-color: rgba(48, 36, 51, .6);
 }*/
 .warning{
-  background-color: rgba(153, 0, 48, .6);
+  background-color: rgba(153, 0, 48, .6) !important;
+  padding: .1em;
 }
 
 #weather {
@@ -144,13 +145,17 @@ tr:nth-child(even){
 
 .side-nav, #weather{
   font-size: 1em;
-  background-image: url('http://bgfons.com/upload/clouds_texture2915.jpg');
-  background-position: center;
+  /*background-image: url('http://bgfons.com/upload/clouds_texture2915.jpg');
+  background-position: center;*/
 }
 
 .weather-scroll{
   height: 20em;
   overflow: scroll;
+  height: 100%;
+  background-color: #cff7e6;
+  color: black;
+  background-image: url('http://bgfons.com/upload/clouds_texture2915.jpg');
 }
 
 #boulder-weather-label {
