@@ -1,37 +1,42 @@
 /*note: 100% of parent element*/
+
 *, *:before, *:after {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box: border-box;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box: border-box;
 }
+
 
 /*html, body, main {
   height: 100%;
   margin: 0;
   padding: 0;
 }*/
-body{
-  font-family: 'Comfortaa', sans-serif;
 
-  /*THIS IS THE ONE I WANT TO USE BUT IS GETTING BAD GATEWAY ERROR*/
-/*background-image: url('http://www.fannone.com/i/2017/02/road-bike-wallpaper-desktop.jpg');*/
-
-background-image: url('http://www.allmacwallpaper.com/get/Retina-MacBook-Pro-15-inch-wallpapers/Bicycle-On-The-City-Street-2880x1800/1711-8.jpg');
-background-position: center;
-/*background-repeat: round;*/
+body {
+    font-family: 'Comfortaa', sans-serif;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    /*THIS IS THE ONE I WANT TO USE BUT IS GETTING BAD GATEWAY ERROR*/
+    /*background-image: url('http://www.fannone.com/i/2017/02/road-bike-wallpaper-desktop.jpg');*/
+    background-image: url('http://www.allmacwallpaper.com/get/Retina-MacBook-Pro-15-inch-wallpapers/Bicycle-On-The-City-Street-2880x1800/1711-8.jpg');
+    background-position: center;
 
 }
-
 
 main {
-  /*height: 100%;*/
-  background-color: rgba(48, 36, 51, .7);
 
-  /*background-image: url('http://wallsdesk.com/wp-content/uploads/2016/11/Bicycle-Background.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;*/
+    background-color: rgba(48, 36, 51, .7);
+    flex: 1 0 auto;
 
 }
+
+h5 {
+  font-weight: 800;
+  font-size: 1.6em;
+}
+
 /*.map-container{
   height: 100%;
   margin: 0;
@@ -39,182 +44,173 @@ main {
 }*/
 
 .nav-wrapper, page-footer {
-  /*background-color: #ACE6CB;*/
-  /*background-color: #53A197;*/
-  /*background-color: rgba(78, 37, 74, .7);*/
-  /*background-color: rgba(116, 2, 2, 1);*/
-  background-color: rgba(126, 16, 57, 1);
+    /*background-color: #ACE6CB;*/
+    /*background-color: #53A197;*/
+    /*background-color: rgba(78, 37, 74, .7);*/
+    /*background-color: rgba(116, 2, 2, 1);*/
+    background-color: rgba(126, 16, 57, 1);
 }
 
 #foot {
-  background-color: rgba(126, 16, 57, 1);
+    background-color: rgba(126, 16, 57, 1);
 }
 
-.brand-logo{
+.brand-logo {
     color: black;
 }
 
 #map {
-  height: 17em;
-  /*height: 20em;
-  margin: 10px;*/
-  /*width: 60em;*/
-
+    height: 17em;
 }
 
-input{
-  color: white;
-  text-overflow: ellipsis;
+input {
+    color: white;
+    text-overflow: ellipsis;
 }
 
 ::-webkit-input-placeholder {
-  color: rgba(150, 237, 201, .8);
-  /*opacity: 1 !important;*/
-  /*color: rgba(115, 36, 61, .7);*/
+    color: rgba(150, 237, 201, .8);
 }
 
-h1{
-  color: white;
-  /*background-color: rgba(48, 36, 51, .6);*/
-  margin: 0;
-  padding: .5em;
-  font-family: 'Comfortaa', sans-serif;
-
+h1 {
+    color: white;
+    margin: 0;
+    padding: .5em;
+    font-family: 'Comfortaa', sans-serif;
 }
 
-/*.input-container{
-  background-color: rgba(48, 36, 51, .6);
-}*/
-.warning{
+
+.warning {
+    background-color: rgba(153, 0, 48, .6) !important;
+}
+
+.warning-point{
   background-color: rgba(153, 0, 48, .6) !important;
-  padding: .1em;
 }
 
 #weather {
-  height: 100%;
-  background-color: #cff7e6;
-  color: black;
+    height: 100%;
+    background-color: #cff7e6;
+    color: black;
 }
 
-.summary{
-
-}
-.distance{
-
+.summary {
+  background-color: rgba(115, 36, 61, .3);
 }
 
+.distance {}
 
-
-.advanced-options{
-  display: none;
+.advanced-options {
+    display: none;
 }
 
-.which-way{
-  display: none;
+.which-way {
+    display: none;
 }
 
-tr:nth-child(even){
-  /*background-color: rgba(255, 255, 255, 0.53);*/
-  /*background-color: rgba(179, 234, 211, .4);*/
-  background-color: rgba(89, 222, 211, 0.33);
-
+tr:nth-child(even) {
+    background-color: rgba(89, 222, 211, 0.33);
 }
 
 #boulder-weather tr:nth-child(odd) {
-  background-color: rgba(115, 36, 61, .3);
+    background-color: rgba(115, 36, 61, .3);
 }
-
-/*tr:nth-child(odd){
-  background-color: rgba(179, 234, 211, .4);
-}*/
 
 .mobile-nav-box {
-  height: 6em;
+    height: 6em;
 }
 
-.table-container{
-  font-size: 1em;
-  height: 25em;
-  overflow: scroll;
-  background-color: rgba(179, 234, 211, .4);
+.table-container {
+    font-size: 1.5em;
+    height: 25em;
+    overflow: scroll;
+    background-color: rgba(179, 234, 211, .6);
 }
 
-.bike-button{
-  padding: 0 1.5em;
+.bike-button {
+    padding: 0 1.5em;
 }
 
-.side-nav, #weather{
-  font-size: 1em;
-  /*background-image: url('http://bgfons.com/upload/clouds_texture2915.jpg');
+.side-nav, #weather {
+    font-size: 1em;
+    /*background-image: url('http://bgfons.com/upload/clouds_texture2915.jpg');
   background-position: center;*/
 }
 
-.foot-container{
-  /*padding: 1em;*/
-  margin-top: 5em;
+.foot-container {
+    height: 100%;
+    padding: 1em;
 }
 
-.weather-scroll{
-  height: 20em;
-  overflow: scroll;
-  height: 100%;
-  background-color: #cff7e6;
-  color: black;
-  background-image: url('http://bgfons.com/upload/clouds_texture2915.jpg');
+.weather-scroll {
+    height: 20em;
+    overflow: scroll;
+    height: 100%;
+    margin-top: 0;
+    background-color: #cff7e6;
+    color: black;
+    background-image: url('http://bgfons.com/upload/clouds_texture2915.jpg');
 }
 
 #boulder-weather-label {
-  background-color: rgba(115, 36, 61, .3);
+    background-color: rgba(115, 36, 61, .3);
+    padding: 1em;
+}
+
+.denver-weather-label{
   padding: 1em;
+}
+
+.userView{
+  margin-bottom: 0px !important;
 }
 /*#weatherTwo{
   background-color: rgba(115, 36, 61, .3);
 }*/
 
-#totals{
-  color: whitesmoke;
+#totals {
+    color: whitesmoke;
 }
 
-label{
-  font-size: 3em;
+label {
+    font-size: 3em;
 }
 
-.toast-class{
-  padding: 5em;
-  background-color: rgba(153, 0, 48, .6);
-  color: black;
-  font-size: 3em;
+.toast-class {
+    padding: 5em;
+    background-color: rgba(153, 0, 48, .6);
+    color: black;
+    font-size: 3em;
 }
 
 @media (max-device-width: 480px) {
-  #map {
-    width: 100%;
-  }
-  h1{
-    font-size: 2.5em;
-    padding: .2em;
-    margin: 0;
-  }
- main {
-   font-size: 1.2em;
- }
-
- .toast-class{
-   padding: 3em;
-   background-color: rgba(153, 0, 48, .6);
-   color: black;
-   font-size: 2em;
- }
-
-
-
+    #map {
+        width: 100%;
+    }
+    h1 {
+        font-size: 2.5em;
+        padding: .2em;
+        margin: 0;
+    }
+    main {
+        font-size: 1.2em;
+    }
+    .toast-class {
+        padding: 3em;
+        background-color: rgba(153, 0, 48, .6);
+        color: black;
+        font-size: 2em;
+    }
 }
+
 
 /*@media (max-device-width: 768px) {
   #map{
     width: 32em;
   }
 }*/
+
+
 /*html, body {
         height: 100%;
         margin: 0;

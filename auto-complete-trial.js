@@ -1,5 +1,87 @@
 $(document).ready(function() {
 
+    // refactor to not have hoisting?
+    function renderDenverWeather(localData) {
+        let list = localData.list
+        let denverTable = $('#denver-weather tbody')
+
+        for (var i = hours; i < list.length; i += 3) {
+            let snow = list[i].snow
+            let temperature = Math.round(list[i].main.temp) + 'º'
+            let description = list[i].weather[0].description
+            let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
+
+            let windSpeed = Math.round(list[i].wind.speed) + "mph"
+
+            let row2 = $('<tr>')
+            let column4 = $('<td>')
+            let column1 = $('<td>')
+            let column2 = $('<td>')
+            let column3 = $('<td>')
+
+            if (i < 24) {
+                column4.text(`${i}:00`)
+            } else {
+                let convertTime = i - 24
+                column4.text(`${convertTime}:00`)
+            }
+
+            column1.text(temperature)
+            column2.text(`${windSpeed} ${windDegree}`)
+            row2.append(column4)
+            row2.append(column1)
+            row2.append(column2)
+            denverTable.append(row2)
+
+        }
+
+    }
+
+    function renderBoulderWeather(localData) {
+        let list = localData.list
+        let boulderTable = $('#boulder-weather tbody')
+
+        for (let i = hours; i < list.length; i += 3) {
+            let snow = list[i].snow
+            let temperature = Math.round(list[i].main.temp) + 'º'
+            // console.log('boulder Temp', temperature);
+            let description = list[i].weather[0].description
+            let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
+
+            let windSpeed = Math.round(list[i].wind.speed) + "mph"
+
+            let row2 = $('<tr>')
+            let column4 = $('<td>')
+            let column1 = $('<td>')
+            let column2 = $('<td>')
+            let column3 = $('<td>')
+
+            if (i < 24) {
+                column4.text(`${i}:00`)
+            } else {
+                let convertTime = i - 24
+                column4.text(`${convertTime}:00`)
+            }
+
+            column1.text(temperature)
+            column2.text(`${windSpeed} ${windDegree}`)
+            row2.append(column4)
+            row2.append(column1)
+            row2.append(column2)
+            boulderTable.append(row2)
+
+        }
+
+    } // end of boulder Weather function
+
+    function smoothTop(e) {
+        // let target = e.target.hash
+        $('html, body').animate({
+            scrollTop: $('#totals').offset().top
+        }, 500);
+    }
+
+
     let map
     let directionsDisplay
     let directionsService = new google.maps.DirectionsService();
@@ -116,7 +198,7 @@ $(document).ready(function() {
         var directionsRenderer3 = new google.maps.DirectionsRenderer({
             directions: result,
             routeIndex: 2,
-            suppressMarkers: true,
+            suppressMarkers: false,
             map: map,
             polylineOptions: {
                 strokeColor: "purple"
@@ -144,6 +226,7 @@ $(document).ready(function() {
             let row2 = $('<tr>')
             let timeSummary = $('<td>')
             timeSummary.text(totalLegTime)
+            timeSummary.addClass('summary')
             row2.append(timeSummary)
             row2.addClass('summary')
 
@@ -174,6 +257,9 @@ $(document).ready(function() {
             }
         }
 
+
+
+
         let placeId = directionsRenderer3.directions.geocoded_waypoints[0].place_id
 
 
@@ -184,23 +270,63 @@ $(document).ready(function() {
                 buildDirections('#panelTwo', '#copyright2')
 
                 allTheTime += parseInt(totalLegTime.match(/\d+/g));
-                console.log('all the time step one?', allTheTime);
+
+                if (allTheTime > 59) {
+                    let hours = 1
+                    let minutes = allTheTime - 60
+                    allTheTime = `${hours}hr ${minutes}`
+                }
+
+                let parsedDistance = parseFloat(totalLegDistance.match(/\d+\.?\d+/g))
+
+
+                allTheDistance += parsedDistance
+
+                $('#totalTime').text(`${allTheTime} min`)
+                $('#totalDistance').text(`${allTheDistance.toFixed(1)} mi`)
 
             } else if (placeId === "ChIJ58F9ysN4bIcRm4CacOXarfI") {
-                //  make this a different function
-                allTheTime += parseInt(totalLegTime.match(/\d+/g));
-                console.log('all the time step two?', allTheTime);
 
                 buildDirections('#panelThree', '#copyright3')
+
+                allTheTime += parseInt(totalLegTime.match(/\d+/g));
+
+                if (allTheTime > 59) {
+                    let hours = 1
+                    let minutes = allTheTime - 60
+                    allTheTime = `${hours}hr ${minutes}`
+                }
+
+                let parsedDistance = parseFloat(totalLegDistance.match(/\d+\.?\d+/g))
+
+                allTheDistance += parsedDistance
+                allTheBikeMiles += parsedDistance
+
+                $('#totalTime').text(`${allTheTime} min`)
+                $('#totalBikeDistance').text(`${allTheBikeMiles.toFixed(1)} mi`)
+                $('#totalDistance').text(`${allTheDistance.toFixed(1)} mi`)
 
             } else {
 
                 buildDirections('#panelOne', '#copyright1')
 
                 allTheTime += parseInt(totalLegTime.match(/\d+/g));
-                console.log(allTheTime, "alltheTime should be totaled?");
 
-                // console.log(parseFloat(totalLegDistance.match(/\d/g)), "parsing distance working?")
+                if (allTheTime > 59) {
+                    let hours = 1
+                    let minutes = allTheTime - 60
+                    allTheTime = `${hours}hr ${minutes}`
+                }
+
+                let parsedDistance = parseFloat(totalLegDistance.match(/\d+\.?\d+/g))
+
+                allTheDistance += parsedDistance
+                allTheBikeMiles += parsedDistance
+
+                $('#totalTime').text(`${allTheTime} min`)
+                $('#totalBikeDistance').text(`${allTheBikeMiles.toFixed(1)} mi`)
+                $('#totalDistance').text(`${allTheDistance.toFixed(1)} mi`)
+
 
             }
 
@@ -209,12 +335,59 @@ $(document).ready(function() {
 
                 buildDirections('#panelTwo', '#copyright2')
 
-            } else if (placeId === "Ei0xNDAxLTE0NDMgQ2FueW9uIEJsdmQsIEJvdWxkZXIsIENPIDgwMzAyLCBVU0E") {
+                allTheTime += parseInt(totalLegTime.match(/\d+/g));
 
+                if (allTheTime > 59) {
+                    let hours = 1
+                    let minutes = allTheTime - 60
+                    allTheTime = `${hours}hr ${minutes}`
+                }
+
+                let parsedDistance = parseFloat(totalLegDistance.match(/\d+\.?\d+/g))
+
+                allTheDistance += parsedDistance
+
+                $('#totalTime').text(`${allTheTime} min`)
+                $('#totalDistance').text(`${allTheDistance.toFixed(1)} mi`)
+
+            } else if (placeId === "Ei0xNDAxLTE0NDMgQ2FueW9uIEJsdmQsIEJvdWxkZXIsIENPIDgwMzAyLCBVU0E") {
                 buildDirections('#panelThree', '#copyright3')
 
+                allTheTime += parseInt(totalLegTime.match(/\d+/g));
+
+                if (allTheTime > 59) {
+                    let hours = 1
+                    let minutes = allTheTime - 60
+                    allTheTime = `${hours}hr ${minutes}`
+                }
+
+
+                let parsedDistance = parseFloat(totalLegDistance.match(/\d+\.?\d+/g))
+
+                allTheDistance += parsedDistance
+                allTheBikeMiles += parsedDistance
+
+                $('#totalTime').text(`${allTheTime} min`)
+                $('#totalBikeDistance').text(`${allTheBikeMiles.toFixed(1)} mi`)
+                $('#totalDistance').text(`${allTheDistance.toFixed(1)} mi`)
             } else {
                 buildDirections('#panelOne', '#copyright1')
+                allTheTime += parseInt(totalLegTime.match(/\d+/g));
+
+                if (allTheTime > 59) {
+                    let hours = 1
+                    let minutes = allTheTime - 60
+                    allTheTime = `${hours}hr ${minutes}`
+                }
+
+                let parsedDistance = parseFloat(totalLegDistance.match(/\d+\.?\d+/g))
+
+                allTheDistance += parsedDistance
+                allTheBikeMiles += parsedDistance
+
+                $('#totalTime').text(`${allTheTime} min`)
+                $('#totalBikeDistance').text(`${allTheBikeMiles.toFixed(1)} mi`)
+                $('#totalDistance').text(`${allTheDistance.toFixed(1)} mi`)
             }
         }
     }
@@ -258,25 +431,13 @@ $(document).ready(function() {
             document.getElementById("map"), {
                 center: new google.maps.LatLng(40.016779, -105.276376),
                 zoom: 11,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
             });
         directionsDisplay.setMap(map);
         new AutocompleteDirectionsHandler(map);
-
-        // call first route
-
-
     }
 
-    //   SET bounds
-
-
     initMap()
-
-    //  work with local storage here?
-
-
-
 
     $('#submit').click(function(e) {
         e.target = this
@@ -284,19 +445,20 @@ $(document).ready(function() {
             Materialize.toast('directions?', 4000, 'toast-class')
         } else {
 
-
+          allTheTime = 0
+          allTheBikeMiles = 0
+          allTheDistance = 0
             // KEEPING TOTALS HIDDEN FOR THURSDAY
-            // $('#totals').removeClass('hide')
+            $('#totals').removeClass('hide')
             $('#directions-tables').removeClass('hide')
-            $('#totalTime').text(`${allTheTime} min`)
+            smoothTop()
+
+
 
 
             $('#panelOne tbody').empty()
             $('#panelTwo tbody').empty()
             $('#panelThree tbody').empty()
-
-
-
 
             if ($('#origin-input').val().includes('Boulder') && $('#destination-input').val().includes('Denver')) {
                 calculateAndDisplayRoute(new google.maps.LatLng(originLatitude, originLongitude), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
@@ -305,6 +467,9 @@ $(document).ready(function() {
 
                 calculateAndDisplayRoute(new google.maps.LatLng(39.753931, -105.001159), new google.maps.LatLng(destinationLatitude, destinationLongitude), directionsService, directionsDisplay, map)
 
+                // $('#totalTime').text(`${allTheTime} min`)
+                // $('#totalBikeDistance').text(`${allTheBikeMiles} mi`)
+                // $('#totalDistance').text(`${allTheDistance} mi`)
 
             } else if ($('#origin-input').val().includes('Denver') && $('#destination-input').val().includes('Boulder')) {
 
@@ -313,20 +478,33 @@ $(document).ready(function() {
                 calculateAndDisplayBusRoute(new google.maps.LatLng(39.753931, -105.001159), new google.maps.LatLng(40.016779, -105.276376), directionsService, directionsDisplay, map)
 
                 calculateAndDisplayRoute(new google.maps.LatLng(40.016779, -105.276376), new google.maps.LatLng(destinationLatitude, destinationLongitude), directionsService, directionsDisplay, map)
+
+                $('#totalTime').text(`${allTheTime} min`)
+                $('#totalBikeDistance').text(`${allTheBikeMiles} mi`)
+                $('#totalDistance').text(`${allTheDistance} mi`)
+
             } else if ($('#origin-input').val().includes('Boulder') && $('#destination-input').val().includes('Boulder')) {
                 calculateAndDisplayRoute(new google.maps.LatLng(originLatitude, originLongitude), new google.maps.LatLng(destinationLatitude, destinationLongitude), directionsService, directionsDisplay, map)
+
+                // $('#totalTime').text(`${totalLegTime} min`)
+                // $('#totalBikeDistance').text(`${totalLegDistance} mi`)
+                // $('#totalDistance').text(`${totalLegDistance} mi`)
             } else if ($('#origin-input').val().includes('Denver') && $('#destination-input').val().includes('Denver')) {
                 calculateAndDisplayRoute(new google.maps.LatLng(originLatitude, originLongitude), new google.maps.LatLng(destinationLatitude, destinationLongitude), directionsService, directionsDisplay, map)
+
+                // $('#totalTime').text(`${totalLegTime} min`)
+                // $('#totalBikeDistance').text(`${totalLegDistance} mi`)
+                // $('#totalDistance').text(`${totalLegDistance} mi`)
             }
 
         }
-    }) // end of click
+    })
 
     // only do ajax call if local storage isn't set.
     if (localStorage.getItem(`boulder-${year}-${date}-${month}`) === null) {
         $.ajax({
             method: 'GET',
-            url: 'http://api.openweathermap.org/data/2.5/forecast?lat=40.017512&lon=-105.28561100000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05',
+            url: 'http://api.openweathermap.org/data/2.5/forecast?lat=40.017512&lon=-105.28561100000002&units=imperial&APPID=729e6b2145aba4a364a351410c133313',
             // url: 'boulder-weather-data.js',
             dataType: 'json',
             success: function(data) {
@@ -338,48 +516,6 @@ $(document).ready(function() {
 
                 renderBoulderWeather(aValue)
                 // console.log('meh', aValue);
-
-                //  okay, so now that local storage is being set...
-                //  now I need to move these tables outside the ajax call because otherwise they will only work once...
-
-                // let list = data.list
-                // // console.log(list, "list");
-                // let boulderTable = $('#boulder-weather tbody')
-                //
-                //
-                // for (var i = hours; i < list.length; i += 3) {
-                //     let snow = list[i].snow
-                //     let temperature = Math.round(list[i].main.temp) + 'º'
-                //     // console.log('boulder Temp', temperature);
-                //     let description = list[i].weather[0].description
-                //     let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
-                //
-                //     let windSpeed = Math.round(list[i].wind.speed) + "mph"
-                //
-                //     let row2 = $('<tr>')
-                //     let column4 = $('<td>')
-                //     let column1 = $('<td>')
-                //     let column2 = $('<td>')
-                //     let column3 = $('<td>')
-                //
-                //     if (i < 24) {
-                //         column4.text(`${i}:00`)
-                //     } else {
-                //         let convertTime = i - 24
-                //         column4.text(`${convertTime}:00`)
-                //     }
-                //
-                //     column1.text(temperature)
-                //     column2.text(`${windSpeed} ${windDegree}`)
-                //     row2.append(column4)
-                //     row2.append(column1)
-                //     row2.append(column2)
-                //     boulderTable.append(row2)
-                //
-                // }
-                //
-                //
-
             },
             error: function() {
                 // console.log('error');
@@ -396,7 +532,7 @@ $(document).ready(function() {
     if (localStorage.getItem(`denver-${year}-${date}-${month}`) === null) {
         $.ajax({
             method: 'GET',
-            url: `http://api.openweathermap.org/data/2.5/forecast?lat=39.7366466&lon=-104.98454900000002&units=imperial&APPID=db2edac29cd5933073366cfb65c34f05`,
+            url: `http://api.openweathermap.org/data/2.5/forecast?lat=39.7366466&lon=-104.98454900000002&units=imperial&APPID=729e6b2145aba4a364a351410c133313`,
             // url: 'denver-weather-data.js',
             dataType: 'json',
             success: function(data) {
@@ -420,86 +556,9 @@ $(document).ready(function() {
 
         renderDenverWeather(denverData)
     }
-    // refactor to not have hoisting?
-    function renderDenverWeather(localData) {
-        let list = localData.list
-        let denverTable = $('#denver-weather tbody')
-
-        for (var i = hours; i < list.length; i += 3) {
-            let snow = list[i].snow
-            let temperature = Math.round(list[i].main.temp) + 'º'
-            let description = list[i].weather[0].description
-            let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
-
-            let windSpeed = Math.round(list[i].wind.speed) + "mph"
-
-            let row2 = $('<tr>')
-            let column4 = $('<td>')
-            let column1 = $('<td>')
-            let column2 = $('<td>')
-            let column3 = $('<td>')
-
-            if (i < 24) {
-                column4.text(`${i}:00`)
-            } else {
-                let convertTime = i - 24
-                column4.text(`${convertTime}:00`)
-            }
-
-            column1.text(temperature)
-            column2.text(`${windSpeed} ${windDegree}`)
-            row2.append(column4)
-            row2.append(column1)
-            row2.append(column2)
-            denverTable.append(row2)
-
-        }
-
-    }
-
-    function renderBoulderWeather(localData) {
-        let list = localData.list
-        let boulderTable = $('#boulder-weather tbody')
-
-        for (let i = hours; i < list.length; i += 3) {
-            let snow = list[i].snow
-            let temperature = Math.round(list[i].main.temp) + 'º'
-            // console.log('boulder Temp', temperature);
-            let description = list[i].weather[0].description
-            let windDegree = degreeArray[Math.round(((list[i].wind.deg % 360) / 45))]
-
-            let windSpeed = Math.round(list[i].wind.speed) + "mph"
-
-            let row2 = $('<tr>')
-            let column4 = $('<td>')
-            let column1 = $('<td>')
-            let column2 = $('<td>')
-            let column3 = $('<td>')
-
-            if (i < 24) {
-                column4.text(`${i}:00`)
-            } else {
-                let convertTime = i - 24
-                column4.text(`${convertTime}:00`)
-            }
-
-            column1.text(temperature)
-            column2.text(`${windSpeed} ${windDegree}`)
-            row2.append(column4)
-            row2.append(column1)
-            row2.append(column2)
-            boulderTable.append(row2)
-
-        }
-
-
-
-
-    } // end of boulder Weather function
-
-    console.log(allTheTime, "All The Time totaled after route input?? pleeease?");
 
 })
+
 
 
 

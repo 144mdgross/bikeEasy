@@ -69,11 +69,11 @@
                         <div class="col s12 m12 l12 weather-scroll">
                           <table id="denver-weather" class="weather-container">
                             <thead>
-                              <tr><h5>Denver Weather</h5></tr>
+                              <tr><h5 class='denver-weather-label'>Denver Weather</h5></tr>
                                 <th><i class="fa fa-clock-o"></i></th>
                                 <th><i class="fa fa-thermometer-half"></i></th>
                                 <!-- <th>Wind</th> -->
-                                <th>Wind<i class="fa fa-compass"></i></th>
+                                <th>Wind    <i class="fa fa-compass"></i></th>
                             </thead>
                             <tbody>
                             </tbody>
@@ -184,16 +184,16 @@
                                     <th class="center">
                                         <h5>Total Time</h5></th>
                                     <th class="center">
-                                        <h5>Distance on Bike</h5></th>
+                                        <h5>Bike Miles</h5></th>
                                     <th class="center">
                                         <h5>Total Distance</h5></th>
                                 </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <td id="totalTime"></td>
-                                <td id="totalBikeDistance"></td>
-                                <td id="totalDistance"></td>
+                                <td id="totalTime" class="center"></td>
+                                <td id="totalBikeDistance" class="center"></td>
+                                <td id="totalDistance" class="center"></td>
                               </tr>
                             </tbody>
                         </table>
@@ -229,7 +229,9 @@
                             <tr id="copyright1">
                                 <!-- <td id="copyright1"></td> -->
                             </tr>
-                            <tr class="warning center">
+                            <tr warning-point>
+                              <td class="warning"></td>
+                              <td><i class="fa fa-exclamation-circle " aria-hidden="true"></i></td>
                                 <!-- <td class="warning center"></td> -->
                             </tr>
                         </tfoot>
@@ -251,7 +253,9 @@
                               <tr id="copyright2">
                                   <!-- <td id="copyright1"></td> -->
                               </tr>
-                              <tr class="warning center">
+                              <tr warning-point>
+                                <td class="warning"></td>
+                                <td><i class="fa fa-exclamation-circle " aria-hidden="true"></i></td>
                                   <!-- <td class="warning center"></td> -->
                               </tr>
                         </tfoot>
@@ -271,7 +275,9 @@
                               <tr id="copyright3">
                                   <!-- <td id="copyright1"></td> -->
                               </tr>
-                              <tr class="warning center">
+                              <tr warning-point>
+                                <td class="warning"></td>
+                                <td><i class="fa fa-exclamation-circle " aria-hidden="true"></i></td>
                                   <!-- <td class="warning center"></td> -->
                               </tr>
                         </tfoot>
@@ -288,7 +294,7 @@
 
 
 
-
+</main>
         <!-- </div> -->
 
         <!-- FOR SOME REASON THE FOOTER SMASHES THE MAIN CONTENT IF IT ISN'T INSIDE THE MAIN TAG. THIS ONLY SEEMS TO HAPPEN WITH THE MAP PRESENT. -->
@@ -297,20 +303,11 @@
                 <div class="row">
                     <div class="col l6 s12">
                         <h3 class="white-text">bike easy</h3>
-                        <!-- <p class="grey-text text-lighten-4">bus + bike = win</p> -->
-
                     </div>
                     <div class="col l4 offset-l2 s12">
                         <p class="grey-text text-lighten-4 center">making bus and bike directions simple for the denver/boulder metro area</p>
-                      <!-- <br>
-                      <br> -->
-
-                        <!-- <ul>
-                            <li><a class="grey-text text-lighten-3" href="#!">Saved Routes</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Weather</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Travel Preferenes</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">App Settings</a></li>
-                        </ul> -->
+                        <br>
+                        <a href='#input-form' class="grey-text text-lighten-4 right">to the top</a>
                     </div>
                 </div>
             </div>
@@ -322,7 +319,7 @@
             </div>
         </footer>
 
-    </main>
+
 
 
 
