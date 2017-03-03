@@ -234,7 +234,7 @@
         row2.append(distanceSummary)
         $(`${panel} tbody`).append(row2)
 
-        for (let i = 1; i < steps.length; i++) {
+        for (let i = 0; i < steps.length; i++) {
           let instruction = steps[i].instructions
           let stepTime = steps[i].duration.text
           let instructionDistance = steps[i].distance.text
