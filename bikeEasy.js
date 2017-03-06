@@ -458,8 +458,8 @@
         }
         else if ($('#origin-input').val().includes('Boulder') && $('#destination-input').val().includes('Boulder')) {
           calculateAndDisplayRoute(new google.maps.LatLng(originLatitude, originLongitude), new google.maps.LatLng(destinationLatitude, destinationLongitude), directionsService, directionsDisplay, map)
-
-        } else if ($('#origin-input').val().includes('Denver') && $('#destination-input').val().includes('Denver')) {
+        }
+        else if ($('#origin-input').val().includes('Denver') && $('#destination-input').val().includes('Denver')) {
           calculateAndDisplayRoute(new google.maps.LatLng(originLatitude, originLongitude), new google.maps.LatLng(destinationLatitude, destinationLongitude), directionsService, directionsDisplay, map)
         }
       }
@@ -489,7 +489,6 @@
               renderBoulderWeather(oldWeather)
             },
             error: function() {
-              console.log('error');
             }
           })
         }
@@ -525,7 +524,6 @@
               renderDenverWeather(oldDenverWeather)
             },
             error: function() {
-              console.log('error');
             }
           })
         }
