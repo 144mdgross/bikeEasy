@@ -10,10 +10,11 @@
 ##How does your project solve this problem?
 	It gives users access to all three legs of their trip (bike to the bus station, bus between cities, and bike to destination) in once place. It also provides weather information so people can understand what conditions they will be biking in.
 ##What web APIs did it use?
-	-google maps javascript api
-	-google maps directions service
-	-google maps places library
-	-open weather map api
+	-Google Maps Javascript API
+	-Google Maps Directions API
+	-Google Places API
+  -Google Maps Geocoding API
+	-Open Weather API
 ##What technologies did it use?
 	Languages: html, CSS, vanilla Javascript
 	Frameworks: Materialize and jQuery.
