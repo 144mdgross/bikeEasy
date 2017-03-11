@@ -19,7 +19,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 
 
-    <!-- Replace the value of the key parameter with your own API key. -->
     <!-- it also appears that I don't need the async and defer tags here either. since $(doc).ready -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8Lgex8nTqbToDXIyayP-WHEe2ssI6j5c&libraries=places"></script>
 
@@ -30,10 +29,10 @@
       <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/54-200.png">
 
     <!-- my js-->
-    <script src="bikeEasy.js" charset="utf-8"></script>
+    <script src="js/bikeEasy.js" charset="utf-8"></script>
 
     <!-- my stylesheet -->
-    <link rel="stylesheet" href="bike.css">
+    <link rel="stylesheet" href="css/bike.css">
     <title>bike easy</title>
 </head>
 
@@ -41,21 +40,19 @@
 <body>
     <header>
         <nav>
-
-
             <div class="nav-wrapper">
                 <a class="brand-logo center">bike easy</a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">cloud</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li>denver/boulder</a></li>
+                    <li>denver/boulder</li>
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
                     <li>
                         <div class="userView">
                             <div class="background">
-                                <img src="https://s-media-cache-ak0.pinimg.com/originals/fd/bf/1d/fdbf1dc2a48d96023b21a3002ddc3198.jpg">
+                                <img src="https://s-media-cache-ak0.pinimg.com/originals/fd/bf/1d/fdbf1dc2a48d96023b21a3002ddc3198.jpg" alt="bike-seat">
                             </div>
-                            <img class="circle" src="https://s-media-cache-ak0.pinimg.com/736x/97/35/5a/97355afdf2fba89ef5dc60590529711c.jpg">
+                            <img class="circle" src="https://s-media-cache-ak0.pinimg.com/736x/97/35/5a/97355afdf2fba89ef5dc60590529711c.jpg" alt="sun">
                             <div class="container mobile-nav-box">
 
                             </div>
@@ -66,48 +63,53 @@
                       <!-- DENVER TABLE -->
                     <!-- <div class="container" id="weather">
                       <div class="row"> -->
-                        <div class="col s12 m12 l12 weather-scroll">
-                          <table id="denver-weather" class="weather-container">
+                      <li>
+                        <!-- <div class="col s12 m12 l12 weather-scroll"> -->
+                          <table id="denver-weather" class="weather-container weather-scroll">
                             <thead>
-                              <tr><h5 class='denver-weather-label'>Denver Weather</h5></tr>
+                              <tr>
+                                <th class='denver-weather-label table-header-weather'>Denver
+                                </th>
+                              </tr>
+                              <tr>
                                 <th><i class="fa fa-clock-o"></i></th>
                                 <th><i class="fa fa-thermometer-half"></i></th>
                                 <!-- <th>Wind</th> -->
                                 <th>Wind    <i class="fa fa-compass"></i></th>
+                              </tr>
                             </thead>
                             <tbody>
                             </tbody>
                           </table>
+                        </li>
                         <!-- </div>
                       </div> -->
-
-
                         <!-- <div class="row"> -->
-                        <div class="col s12 m12 l12 weather-scroll">
-                          <table id="boulder-weather" class="weather-container">
+                      <li>
+                        <!-- <div class="col s12 m12 l12 weather-scroll"> -->
+                          <table id="boulder-weather" class="weather-container weather-scroll">
                             <thead>
-                              <tr><h5 id="boulder-weather-label">Boulder Weather</h5></tr>
+                              <tr><th class="boulder-weather-label table-header-weather">Boulder</tr>
+                                <tr>
                                 <th><i class="fa fa-clock-o"></i></th>
                                 <th><i class="fa fa-thermometer-half"></i></th>
                                 <!-- <th>Wind</th> -->
                                 <th>Wind<i class="fa fa-compass"></i></th>
+                              </tr>
                             </thead>
                             <tbody>
                             </tbody>
                           </table>
-                        </div>
+                          </li>
+                        <!-- </div> -->
                         <!-- </div> -->
 
-                    </div>
+                    <!-- </div> -->
                       <!-- END OF WEATHER CONTAINER -->
-
                 </ul>
             </div>
-        <!-- IF THIS START TO BREAK THIS NAV AND THE ONE ABOVE IT COULD MAYBE BE TO BLAME...THEY WERE HANGING OUT AS A <NAV></DIV> SET BEFORE I CHANGED IT TO </NAV> -->
-
         </nav>
     </header>
-
     <main>
         <!-- <div class="container"> -->
         <h1 class="header center">the places you'll go</h1>
@@ -181,12 +183,10 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="center">
-                                        <h5>Total Time</h5></th>
-                                    <th class="center">
-                                        <h5>Bike Miles</h5></th>
-                                    <th class="center">
-                                        <h5>Total Distance</h5></th>
+                                    <th class="center table-header-weather">
+                                        Total Time</th>
+                                    <th class="center table-header-weather">Bike Miles</th>
+                                    <th class="center table-header-weather">Total Distance</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -218,21 +218,14 @@
                 <div class="col s12 m12 l4 table-container">
                     <h5 class="center">Bike</h5>
                     <table id='panelOne'>
-                        <!-- <thead>
-                            <tr>
-                                <th class="warning"></th>
-                            </tr>
-                        </thead> -->
                         <tbody>
                         </tbody>
                         <tfoot>
                             <tr id="copyright1">
-                                <!-- <td id="copyright1"></td> -->
                             </tr>
-                            <tr warning-point>
+                            <tr>
                               <td class="warning"></td>
                               <td><i class="fa fa-exclamation-circle " aria-hidden="true"></i></td>
-                                <!-- <td class="warning center"></td> -->
                             </tr>
                         </tfoot>
                     </table>
@@ -248,12 +241,11 @@
                     <table id='panelTwo'>
                         <tbody>
                         </tbody>
-                        <tfoot>
                           <tfoot>
                               <tr id="copyright2">
                                   <!-- <td id="copyright1"></td> -->
                               </tr>
-                              <tr warning-point>
+                              <tr>
                                 <td class="warning"></td>
                                 <td><i class="fa fa-exclamation-circle " aria-hidden="true"></i></td>
                                   <!-- <td class="warning center"></td> -->
@@ -270,12 +262,11 @@
                     <table id='panelThree'>
                         <tbody>
                         </tbody>
-                        <tfoot>
                           <tfoot>
                               <tr id="copyright3">
                                   <!-- <td id="copyright1"></td> -->
                               </tr>
-                              <tr warning-point>
+                              <tr>
                                 <td class="warning"></td>
                                 <td><i class="fa fa-exclamation-circle " aria-hidden="true"></i></td>
                                   <!-- <td class="warning center"></td> -->
@@ -289,10 +280,6 @@
         </div>
         <!-- end of container div -->
         <!-- END OF DIRECTIONS PANEL THREE-->
-
-
-
-
 
 </main>
         <!-- </div> -->
@@ -318,24 +305,5 @@
                 </div>
             </div>
         </footer>
-
-
-
-
-
-    <!-- </div>
-    </div>
-  </div> -->
-    <!-- <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
-    </script> -->
-
 </body>
-
 </html>

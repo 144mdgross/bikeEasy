@@ -100,9 +100,6 @@
       }, 500);
     }
 
-
-
-
     // select box initialize
     $('select').material_select()
     // initialize side-nav
@@ -167,7 +164,6 @@
 
       this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
       this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
-
     }
 
 
@@ -187,13 +183,10 @@
           me.destinationPlaceId = place.place_id;
           GetLatlongDestination()
         }
-
-      });
-
-    };
+      })
+    }
 
     function renderDirections(result, map) {
-
       let directionsRenderer3 = new google.maps.DirectionsRenderer({
         directions: result,
         routeIndex: 2,
@@ -202,7 +195,7 @@
         polylineOptions: {
           strokeColor: "purple"
         }
-      });
+      })
 
       let warning = directionsRenderer3.directions.routes[0].warnings[0]
       let steps = directionsRenderer3.directions.routes[0].legs[0].steps
@@ -351,7 +344,6 @@
         else {
           buildDirections('#panelOne', '#copyright1')
           allTheTime += parseInt(totalLegTime.match(/\d+/g));
-          console.log(placeId, "placeId");
 
           if (allTheTime > 59) {
             let hour = 1
@@ -382,8 +374,7 @@
           renderDirections(response, map);
         }
         else {
-
-          // window.alert('Directions request failed due to ' + status);
+          window.alert('Directions request failed due to ' + status);
         }
       })
     }
@@ -464,7 +455,6 @@
         }
       }
     })
-
     // only do ajax call for boulder weather if local storage isn't set.
     if (localStorage.getItem(`boulder-${year}-${date}-${month}`) === null) {
       $.ajax({
@@ -473,7 +463,7 @@
         dataType: 'json',
         success: function(data) {
           localStorage.setItem(`boulder-${year}-${date}-${month}`, JSON.stringify(data))
-          let aValue = JSON.parse(localStorage.getItem(`boulder-${year}-${date}-${month}`));
+          let aValue = JSON.parse(localStorage.getItem(`boulder-${year}-${date}-${month}`))
 
           renderBoulderWeather(aValue)
         },
