@@ -8,10 +8,10 @@
 * It gives people who want to commute from boulder/denver or denver/boulder bus and bike directions (and the weather) all in one spot.
 
 ## Who has this problem?
-	`Cyclists commuting via bus. So me, my friends and many other people in the boulder/denver metro area.`
+	Cyclists commuting via bus. So me, my friends and many other people in the boulder/denver metro area.
 	
 ## How my project solves this problem:
-	```It gives users access to all three legs of their trip (bike to the bus station, bus between cities, and bike to destination) in once place. It also provides weather information so people can understand what conditions they will be biking in.```
+	It gives users access to all three legs of their trip (bike to the bus station, bus between cities, and bike to destination) in once place. It also provides weather information so people can understand what conditions they will be biking in.
 	
 ## APIs:
 	- Google Maps Javascript API
@@ -22,9 +22,9 @@
 	
 ## Technologies used.
 
-	Languages: `html, CSS, JavaScript`
+	Languages: html, CSS, JavaScript
 	
-	Frameworks: `Materialize and jQuery`
+	Frameworks: Materialize and jQuery
 
 ## What was the biggest challenge you had to overcome?
 
