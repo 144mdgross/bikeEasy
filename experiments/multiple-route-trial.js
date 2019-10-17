@@ -41,7 +41,7 @@ if(isChecked === 'test1') {
 
 // $.ajax({
 //   method: 'GET',
-//   url: "http://maps.googleapis.com/maps/api/js?key=AIzaSyC8Lgex8nTqbToDXIyayP-WHEe2ssI6j5c&libraries=places",
+//   url: "http://maps.googleapis.com/maps/api/js?key=,
 //   success: function(data) {
 //     console.log(succes, "success")
 //   },

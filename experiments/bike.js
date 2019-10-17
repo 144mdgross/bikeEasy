@@ -47,7 +47,7 @@ $(document).ready(function() {
               // try putting ajax call here? so it goes after coords?....
               $.ajax({
                           method: 'GET',
-                          url: `https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bus+stops&location=${pos.lat},${pos.lng}&radius=500&key=AIzaSyC8Lgex8nTqbToDXIyayP-WHEe2ssI6j5c`,
+                          url: `https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bus+stops&location=${pos.lat},${pos.lng}&radius=500&key=AIzaSyD9mPO6ii0qE6clKZ9oy7JelF9c5eETza0`,
                           dataType: 'json',
                           //  send HTTP request to OMDB API search endpoint(see docs)
                           success: function(data) {
@@ -175,7 +175,7 @@ $(document).ready(function() {
     // this needs to happen after user either accepts of denies location access
     // $.ajax({
     //             method: 'GET',
-    //             url: `https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bus+stops&location=${pos.lat},${pos.lng}&radius=500&key=AIzaSyC8Lgex8nTqbToDXIyayP-WHEe2ssI6j5c`,
+    //             url: `https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bus+stops&location=${pos.lat},${pos.lng}&radius=500&key=
     //             dataType: 'json',
     //             //  send HTTP request to OMDB API search endpoint(see docs)
     //             success: function(data) {
